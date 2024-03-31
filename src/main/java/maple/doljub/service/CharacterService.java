@@ -1,7 +1,7 @@
 package maple.doljub.service;
 
 import lombok.RequiredArgsConstructor;
-import maple.doljub.dto.maple.CharacterMapleResDTO;
+import maple.doljub.dto.maple.CharacterMapleResDto;
 import maple.doljub.config.RestTemplateClient;
 import maple.doljub.domain.Character;
 import maple.doljub.domain.Guild;
@@ -10,6 +10,8 @@ import maple.doljub.dto.CharacterDto;
 import maple.doljub.repository.CharacterRepository;
 import maple.doljub.repository.GuildRepository;
 import maple.doljub.repository.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,17 +29,11 @@ public class CharacterService {
      */
     @Transactional
     public Long join(CharacterDto characterDto) {
-        /**
-         * 회원 가입 메서드로 빼야된다.
-         */
-        User joinUser = new User("maple","1234","멋쟁이");
-        userRepository.save(joinUser);
-        User user = userRepository.findById(joinUser.getId()).get();
-
+        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         // ocid 받아오기
         String ocid = restTemplateClient.getOcid(characterDto);
         // 캐릭터 정보 받아오기
-        CharacterMapleResDTO characterInfo = restTemplateClient.getCharacterInfo(ocid);
+        CharacterMapleResDto characterInfo = restTemplateClient.getCharacterInfo(ocid);
         // 캐릭터 객체 생성
         Character mapleCharacter = new Character(ocid,characterInfo.getCharacterName(),characterInfo.getCharacterJobName());
         // 길드 정보 받아오기

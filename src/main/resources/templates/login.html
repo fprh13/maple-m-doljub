@@ -1,10 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>로그인</title>
-</head>
-<body>
+<head th:replace="fragments/header :: header" />
 
+
+<body>
+<!-- Nav -->
+<head th:replace="fragments/bodyHeader :: bodyHeader" />
+<!-- ./ Nav -->
+
+<!-- Main -->
+<main class="container">
+
+    <article class="grid">
+        <div>
+            <hgroup>
+                <h1>로그인</h1>
+                <p style="margin-bottom: 164px;">현재 Beta 버전입니다.</p>
+            </hgroup>
+            <form th:object="${loginDto}" action="/login/process", method="post">
+                <input
+                        th:field="*{username}"
+                        type="text"
+                        name="login"
+                        placeholder="Login"
+                        aria-label="Login"
+                        autocomplete="username"
+                        required
+                />
+                <input
+                        th:field="*{password}"
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        aria-label="Password"
+                        autocomplete="current-password"
+                        required
+                />
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                    <small th:if="${param.error}" style="color: red" >아이디와 비밀번호가 일치하지 않습니다.</small>
+                <button type="submit" class="contrast">Login</button>
+            </form>
+            <a href="/signup" class="secondary"
+            >회원가입</a
+            >
+        </div>
+        <div></div>
+    </article>
+</main>
+<!-- ./ Main -->
+
+<!-- Footer -->
+<div th:replace="fragments/footer :: footer" />
+<!-- ./ Footer -->
+
+<!-- Minimal theme switcher -->
+<script src="./js/minimal-theme-switcher.js"></script>
 </body>
 </html>

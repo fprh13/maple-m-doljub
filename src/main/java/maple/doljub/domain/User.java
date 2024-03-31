@@ -23,15 +23,18 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL) // 캐릭터 조회용
     private List<Character> characters = new ArrayList<>();
 
-    private String LoginId;
+    private String username;
 
     private String password;
 
-    private String nickName;
+    private String email;
 
-    public User(String loginId, String password, String nickName) {
-        LoginId = loginId;
+    private String role;
+
+    public User(String username, String password, String email, String role) {
+        this.username = username;
         this.password = password;
-        this.nickName = nickName;
+        this.email = email;
+        this.role = role;
     }
 }

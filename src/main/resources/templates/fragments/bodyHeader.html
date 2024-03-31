@@ -1,8 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" data-bs-theme="dark">
 <div class="header" th:fragment="bodyHeader">
-    <ul class="nav nav-pills pull-right">
-        <li><a href="/">Home</a></li>
-    </ul>
-    <a href="/"><h3 class="text-muted">Maple m</h3></a>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>DolJub m</strong><small> Beta</small></li>
+        </ul>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">API</a></li>
+            <li><a href="#">Guild</a></li>
+            <li sec:authorize="isAuthenticated()" ><button class="secondary" onclick="window.location.href='/logout' ">Logout</button></li>
+            <li sec:authorize="isAnonymous()" ><button class="secondary" onclick="window.location.href='/login' ">Login</button></li>
+        </ul>
+    </nav>
 </div>

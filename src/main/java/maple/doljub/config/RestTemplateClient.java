@@ -3,8 +3,8 @@ package maple.doljub.config;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import maple.doljub.dto.CharacterDto;
-import maple.doljub.dto.maple.CharacterMapleResDTO;
-import maple.doljub.dto.maple.GuildMapleResDTO;
+import maple.doljub.dto.maple.CharacterMapleResDto;
+import maple.doljub.dto.maple.GuildMapleResDto;
 import maple.doljub.dto.maple.OcidMapleResDto;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -63,7 +63,7 @@ public class RestTemplateClient {
 
     }
 
-    public CharacterMapleResDTO getCharacterInfo(String ocid) {
+    public CharacterMapleResDto getCharacterInfo(String ocid) {
         // URI 빌드
         URI uri = UriComponentsBuilder.fromUriString("https://open.api.nexon.com/maplestorym/v1/character/basic")
                 .queryParam("ocid", ocid)
@@ -81,9 +81,9 @@ public class RestTemplateClient {
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         // 바디 응답 값을 DTO 객체로 매핑
         ObjectMapper objectMapper = new ObjectMapper();
-        CharacterMapleResDTO characterInfoDTO;
+        CharacterMapleResDto characterInfoDTO;
         try {
-            characterInfoDTO = objectMapper.readValue(responseEntity.getBody(), CharacterMapleResDTO.class);
+            characterInfoDTO = objectMapper.readValue(responseEntity.getBody(), CharacterMapleResDto.class);
             return characterInfoDTO;
         } catch (JsonProcessingException e) {
             // 처리할 수 없는 예외 처리
@@ -112,9 +112,9 @@ public class RestTemplateClient {
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         // 바디 응답 값을 DTO 객체로 매핑
         ObjectMapper objectMapper = new ObjectMapper();
-        GuildMapleResDTO guildInfoDTO;
+        GuildMapleResDto guildInfoDTO;
         try {
-            guildInfoDTO = objectMapper.readValue(responseEntity.getBody(), GuildMapleResDTO.class);
+            guildInfoDTO = objectMapper.readValue(responseEntity.getBody(), GuildMapleResDto.class);
             return guildInfoDTO.getGuildName();
         } catch (JsonProcessingException e) {
             // 처리할 수 없는 예외 처리

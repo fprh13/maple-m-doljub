@@ -17,14 +17,14 @@ public class CharacterController {
 
     private final CharacterService characterService;
 
-    @GetMapping("/character/registration")
-    public String characterRegPage(Model model) {
+    @GetMapping("/character/register")
+    public String characterRegistrationPage(Model model) {
         model.addAttribute("characterDto", new CharacterDto());
         return "characterRegisterForm";
     }
 
-    @PostMapping("/character/registration/proc")
-    public String characterRegProc(CharacterDto characterDto) {
+    @PostMapping("/character/register/process")
+    public String characterRegistrationProcess(CharacterDto characterDto) {
         characterService.join(characterDto);
         return "redirect:/";
     }

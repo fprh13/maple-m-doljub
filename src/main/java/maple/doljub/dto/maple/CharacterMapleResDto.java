@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class CharacterMapleResDTO {
+public class CharacterMapleResDto {
     @JsonProperty("character_name")
     private String characterName;
 

@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GuildMapleResDTO {
+public class GuildMapleResDto {
     @JsonProperty("guild_name")
     private String guildName;
 
