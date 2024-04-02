@@ -13,13 +13,25 @@
         <img src="./images/main.jpg" alt="">
         <br>
         <a href="/character/register"><h3 class="text-muted">캐릭터 등록하기 ✨</h3></a>
+        <br>
         <th:block sec:authorize="isAnonymous()">
-            <h1> 아무나 확인</h1>
+            <h1> 캐릭터 목록 <small>로그인 후 이용</small></h1>
         </th:block>
+
         <th:block sec:authorize="isAuthenticated()">
-            <h1 sec:authentication="name"> 환영합니다.</h1>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Job</th>
+                </tr>
+                <tr th:each="character : ${characters}">
+                    <td th:text="${character.name}"></td>
+                    <td th:text="${character.job}"></td>
+                </tr>
+            </table>
         </th:block>
     </div>
+
 </div>
 
 </body>

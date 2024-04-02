@@ -57,7 +57,10 @@ public class CharacterService {
     }
 
     /**
-     * 캐릭터 정보
-     * 꺼내오면 되요
+     * 나의 캐릭터 정보
      */
+    public User findMyCharacters() {
+        User charactersByUsername = userRepository.findCharactersByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        return charactersByUsername;
+    }
 }
