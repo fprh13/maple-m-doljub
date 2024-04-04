@@ -18,7 +18,7 @@
             </hgroup>
             <form th:object="${signupDto}" action="/signup/process", method="post" onsubmit="return validateForm()">
                 <input
-                        th:field="*{username}"
+                        th:field="*{loginId}"
                         type="text"
                         name="login"
                         placeholder="아이디"

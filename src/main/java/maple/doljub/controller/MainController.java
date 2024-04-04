@@ -1,7 +1,8 @@
 package maple.doljub.controller;
 
+import lombok.RequiredArgsConstructor;
 import maple.doljub.domain.Character;
-import maple.doljub.domain.User;
+import maple.doljub.domain.Member;
 import maple.doljub.service.CharacterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,19 +12,16 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class MainController {
 
     private final CharacterService characterService;
 
-    public MainController(CharacterService characterService) {
-        this.characterService = characterService;
-    }
-
     @GetMapping("/")
     public String main(Model model) {
-        User user = characterService.findMyCharacters();
-        if (user != null) {
-            List<Character> characters = user.getCharacters();
+        Member member = characterService.findMyCharacters();
+        if (member != null) {
+            List<Character> characters = member.getCharacters();
             if (characters != null) {
                 model.addAttribute("characters", characters);
             } else {

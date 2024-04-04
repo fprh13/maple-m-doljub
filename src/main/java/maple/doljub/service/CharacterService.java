@@ -1,16 +1,15 @@
 package maple.doljub.service;
 
 import lombok.RequiredArgsConstructor;
+import maple.doljub.domain.Member;
+import maple.doljub.dto.CharacterRegisterReqDto;
 import maple.doljub.dto.maple.CharacterMapleResDto;
 import maple.doljub.config.RestTemplateClient;
 import maple.doljub.domain.Character;
 import maple.doljub.domain.Guild;
-import maple.doljub.domain.User;
-import maple.doljub.dto.CharacterDto;
 import maple.doljub.repository.CharacterRepository;
 import maple.doljub.repository.GuildRepository;
-import maple.doljub.repository.UserRepository;
-import org.springframework.security.core.Authentication;
+import maple.doljub.repository.MemberRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CharacterService {
 
-    private final UserRepository userRepository;
+    private final MemberRepository memberRepository;
     private final GuildRepository guildRepository;
     private final CharacterRepository characterRepository;
     private final RestTemplateClient restTemplateClient;
@@ -28,10 +27,10 @@ public class CharacterService {
      * 캐릭터 등록
      */
     @Transactional
-    public Long join(CharacterDto characterDto) {
-        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+    public Long join(CharacterRegisterReqDto characterRegisterReqDto) {
+        Member member = memberRepository.findByLoginId(SecurityContextHolder.getContext().getAuthentication().getName());
         // ocid 받아오기
-        String ocid = restTemplateClient.getOcid(characterDto);
+        String ocid = restTemplateClient.getOcid(characterRegisterReqDto);
         // 캐릭터 정보 받아오기
         CharacterMapleResDto characterInfo = restTemplateClient.getCharacterInfo(ocid);
         // 캐릭터 객체 생성
@@ -47,11 +46,11 @@ public class CharacterService {
             // 없는 길드라면 새로운 길드 객체 생성
             Guild guild = new Guild(guildName);
 
-            Character character = Character.createCharacter(mapleCharacter, user, guild);
+            Character character = Character.createCharacter(mapleCharacter, member, guild);
             return characterRepository.save(character).getId();
         } else {
             // 있는 길드라면 찾아온 길드 주입
-            Character character = Character.createCharacter(mapleCharacter, user, findGuild);
+            Character character = Character.createCharacter(mapleCharacter, member, findGuild);
             return characterRepository.save(character).getId();
         }
     }
@@ -59,8 +58,7 @@ public class CharacterService {
     /**
      * 나의 캐릭터 정보
      */
-    public User findMyCharacters() {
-        User charactersByUsername = userRepository.findCharactersByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        return charactersByUsername;
+    public Member findMyCharacters() {
+        return memberRepository.findCharactersByLoginId(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 }

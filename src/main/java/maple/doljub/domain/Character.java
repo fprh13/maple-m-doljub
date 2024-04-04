@@ -24,8 +24,8 @@ public class Character {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "user_id") // 연관 관계 주인
-    private User user;
+    @JoinColumn(name = "member_id") // 연관 관계 주인
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST) // 캐릭터 저장 시 길드를 함꼐 저장
     @JoinColumn(name = "guild_id")
@@ -63,17 +63,16 @@ public class Character {
      * Setter
      * 연관관계 주입 시 에만 사용 된다.
      *
-     * @param user
      */
-    public void setUser(User user) {
-        this.user = user;
-        user.getCharacters().add(this);
+    public void setMember(Member member) {
+        this.member = member;
+        member.getCharacters().add(this);
     }
 
-    public static Character createCharacter(Character character, User user, Guild guild) {
+    public static Character createCharacter(Character character, Member member, Guild guild) {
         Character newCharacter = new Character(character.getNexonId(), character.getName(), character.getJob());
         newCharacter.setGuild(guild);
-        newCharacter.setUser(user);
+        newCharacter.setMember(member);
         return newCharacter;
     }
 }

@@ -1,15 +1,12 @@
 package maple.doljub.controller;
 
 import lombok.RequiredArgsConstructor;
-import maple.doljub.dto.CharacterDto;
+import maple.doljub.dto.CharacterRegisterReqDto;
 import maple.doljub.service.CharacterService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,13 +16,13 @@ public class CharacterController {
 
     @GetMapping("/character/register")
     public String characterRegistrationPage(Model model) {
-        model.addAttribute("characterDto", new CharacterDto());
+        model.addAttribute("characterDto", new CharacterRegisterReqDto());
         return "characterRegisterForm";
     }
 
     @PostMapping("/character/register/process")
-    public String characterRegistrationProcess(CharacterDto characterDto) {
-        characterService.join(characterDto);
+    public String characterRegistrationProcess(CharacterRegisterReqDto characterRegisterReqDto) {
+        characterService.join(characterRegisterReqDto);
         return "redirect:/";
     }
 

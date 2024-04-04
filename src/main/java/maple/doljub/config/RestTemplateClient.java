@@ -2,7 +2,7 @@ package maple.doljub.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import maple.doljub.dto.CharacterDto;
+import maple.doljub.dto.CharacterRegisterReqDto;
 import maple.doljub.dto.maple.CharacterMapleResDto;
 import maple.doljub.dto.maple.GuildMapleResDto;
 import maple.doljub.dto.maple.OcidMapleResDto;
@@ -30,11 +30,11 @@ public class RestTemplateClient {
     String URL;
 
 
-    public String getOcid(CharacterDto characterDto) {
+    public String getOcid(CharacterRegisterReqDto characterRegisterReqDto) {
         // URI 빌드
         URI uri = UriComponentsBuilder.fromUriString("https://open.api.nexon.com/maplestorym/v1/id")
-                .queryParam("character_name", characterDto.getName())
-                .queryParam("world_name", characterDto.getWorld())
+                .queryParam("character_name", characterRegisterReqDto.getName())
+                .queryParam("world_name", characterRegisterReqDto.getWorld())
                 .encode(StandardCharsets.UTF_8)
                 .build()
                 .toUri();

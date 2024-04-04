@@ -19,7 +19,7 @@
             </hgroup>
             <form th:object="${loginDto}" action="/login/process", method="post">
                 <input
-                        th:field="*{username}"
+                        th:field="*{loginId}"
                         type="text"
                         name="login"
                         placeholder="Login"

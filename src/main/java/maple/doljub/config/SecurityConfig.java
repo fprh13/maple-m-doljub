@@ -45,6 +45,8 @@ public class SecurityConfig {
         http
                 .formLogin((auth) -> auth.loginPage("/login")
                         .loginProcessingUrl("/login/process")
+                        .usernameParameter("loginId")
+                        .passwordParameter("password")
                         .defaultSuccessUrl("/")
                         .permitAll()
                 );
