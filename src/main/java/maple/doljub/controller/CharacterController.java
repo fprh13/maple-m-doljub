@@ -8,6 +8,7 @@ import maple.doljub.service.CharacterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Collections;
@@ -56,6 +57,11 @@ public class CharacterController {
     /**
      * 다른 사람 캐릭터 상세
      */
+    @GetMapping("/character/info/{name}")
+    public String characterInfo(Model model, @PathVariable("name") String name) {
+        model.addAttribute("character", characterService.info(name));
+        return "characterInfo";
+    }
 
     /**
      *

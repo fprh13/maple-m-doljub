@@ -1,40 +1,42 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
-<!--<head th:replace="fragments/header :: header" />-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header"></head>
 
 
 
-<!--<body>-->
-<!--<head th:replace="fragments/bodyHeader :: bodyHeader" />-->
+<body>
+<head th:replace="fragments/bodyHeader :: bodyHeader"></head>
 
-<!--<div class="main-section d-flex align-items-center">-->
-<!--    <div class="container">-->
-<!--        &lt;!&ndash; 메인 섹션 내용 &ndash;&gt;-->
-<!--        <a href="/character/register"><h3 class="text-muted">캐릭터 등록하기 ✨</h3></a>-->
-<!--        <br>-->
-<!--        <th:block sec:authorize="isAnonymous()">-->
-<!--            <h1> 길드 캐릭터 목록 <small>로그인 후 이용</small></h1>-->
-<!--        </th:block>-->
+    <div class="main-section d-flex align-items-center">
+        <div class="container">
+            <!-- 메인 섹션 내용 -->
 
-<!--        <th:block sec:authorize="isAuthenticated()">-->
-<!--            <p th:text="${guildName}">-->
-<!--            </p>-->
-<!--            <table>-->
-<!--                <tr>-->
-<!--                    <th>Name</th>-->
-<!--                    <th>Job</th>-->
-<!--                </tr>-->
-<!--                <tr th:each="character : ${characters}">-->
-<!--                    <td th:text="${character.name}"></td>-->
-<!--                    <td th:text="${character.job}"></td>-->
-<!--                </tr>-->
-<!--            </table>-->
-<!--        </th:block>-->
-<!--    </div>-->
+            <div class="character-list">
+                <table th:if="${!guilds.isEmpty()}">
+                    <thead>
+                    <tr>
+                        <th>길드명</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="guild : ${guilds}">
+                        <td>
+                            <a th:href="@{/guild/info/{name}(name=${guild.name})}">
+                                <span th:text="${guild.name}"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div th:if="${guilds.isEmpty()}" class="character-empty">
+                    <span>등록된 길드가 없습니다...</span>
+                </div>
+            </div>
+        </div>
 
-<!--</div>-->
+    </div>
 
-<!--</body>-->
-<!--<div th:replace="fragments/footer :: footer" />-->
+</body>
+<div th:replace="fragments/footer :: footer"></div>
 
-<!--</html>-->
+</html>

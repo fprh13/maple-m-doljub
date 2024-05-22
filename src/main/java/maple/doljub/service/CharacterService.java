@@ -2,6 +2,7 @@ package maple.doljub.service;
 
 import lombok.RequiredArgsConstructor;
 import maple.doljub.domain.Member;
+import maple.doljub.dto.CharacterInfoResDto;
 import maple.doljub.dto.CharacterRegisterReqDto;
 import maple.doljub.dto.maple.CharacterMapleResDto;
 import maple.doljub.common.config.RestTemplateClient;
@@ -60,5 +61,15 @@ public class CharacterService {
      */
     public Member findMyCharacters() {
         return memberRepository.findCharactersByLoginId(SecurityContextHolder.getContext().getAuthentication().getName());
+    }
+
+    /**
+     * 캐릭터 정보
+     */
+    public CharacterInfoResDto info(String name) {
+        Character character = characterRepository.findByName(name);
+        String ocid = character.getNexonId();
+        CharacterMapleResDto mapleResDto = restTemplateClient.getCharacterInfo(ocid);
+        return new CharacterInfoResDto(mapleResDto,character.getGuild().getName());
     }
 }
