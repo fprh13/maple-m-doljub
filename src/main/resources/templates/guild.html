@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header"></head>
+
+
+
+<body>
+<head th:replace="fragments/bodyHeader :: bodyHeader"></head>
+
+    <div class="main-section d-flex align-items-center">
+        <div class="container">
+            <!-- 메인 섹션 내용 -->
+
+            <div class="character-list">
+                <table th:if="${!guilds.isEmpty()}">
+                    <thead>
+                    <tr>
+                        <th>길드명</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="guild : ${guilds}">
+                        <td>
+                            <a th:href="@{/guild/info/{name}(name=${guild.name})}">
+                                <span th:text="${guild.name}"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div th:if="${guilds.isEmpty()}" class="character-empty">
+                    <span>등록된 길드가 없습니다...</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<div th:replace="fragments/footer :: footer"></div>
+
+</html>

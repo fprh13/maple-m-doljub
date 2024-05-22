@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+
+<body>
+<!-- Nav -->
+<head th:replace="fragments/bodyHeader :: bodyHeader" />
+<!-- ./ Nav -->
+
+
+<!-- Main -->
+<main class="container">
+    <article class="grid">
+        <div>
+            <hgroup>
+                <h1>회원가입</h1>
+                <p>아래 필드를 모두 채워 주세요.</p>
+            </hgroup>
+            <form th:object="${signupDto}" action="/signup/process", method="post" onsubmit="return validateForm()">
+                <input
+                        th:field="*{loginId}"
+                        type="text"
+                        name="login"
+                        placeholder="아이디"
+                        aria-label="Login"
+                        autocomplete="username"
+                        required
+                />
+                <input
+                        th:field="*{email}"
+                        type="email"
+                        name="email"
+                        placeholder="이메일"
+                        aria-label="email"
+                        autocomplete="email"
+                        required
+                />
+                <input
+                        th:field="*{password}"
+                        type="password"
+                        name="password"
+                        placeholder="비밀번호 (8자리 이상 특수문자 포함)"
+                        aria-label="Password"
+                        autocomplete="current-password"
+                        required
+                />
+                <input
+                        type="password"
+                        name="passwordCheck"
+                        placeholder="비밀번호 확인"
+                        aria-label="Password"
+                        autocomplete="current-password"
+                        required
+                />
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+
+                <button type="submit" class="contrast" >Submit</button>
+            </form>
+        </div>
+        <div></div>
+    </article>
+</main>
+<!-- ./ Main -->
+
+<!-- Footer -->
+<div th:replace="fragments/footer :: footer" />
+<!-- ./ Footer -->
+
+<!-- Minimal theme switcher -->
+<script src="./js/minimal-theme-switcher.js"></script>
+<script>
+    function validateForm() {
+        var password = document.getElementsByName("password")[0].value;
+        var passwordCheck = document.getElementsByName("passwordCheck")[0].value;
+
+        if (password !== passwordCheck) {
+            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

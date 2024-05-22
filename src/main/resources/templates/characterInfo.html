@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header"></head>
+
+
+<body>
+<head th:replace="fragments/bodyHeader :: bodyHeader"></head>
+
+<div class="main-section d-flex align-items-center">
+    <div class="container">
+        <!-- 메인 섹션 내용 -->
+        <div class="main-image">
+            <img th:src="@{'/images/' + ${character.job} + '.png'}" alt="Image of job">
+        </div>
+        <div class="character-list">
+
+            <table>
+                <thead>
+                <tr>
+                    <th>🍁</th>
+                    <th>🔥</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>레벨</td>
+                    <td th:text="${character.level}"></td>
+                </tr>
+                <tr>
+                    <td>닉네임</td>
+                    <td th:text="${character.name}"></td>
+                </tr>
+                <tr>
+                    <td>직업</td>
+                    <td th:text="${character.job}"></td>
+                </tr>
+                <tr>
+                    <td>월드</td>
+                    <td th:text="${character.world}"></td>
+                </tr>
+                <tr>
+                    <td>길드</td>
+                    <td th:text="${character.guild}"></td>
+                </tr>
+                <tr>
+                    <td>최근 접속</td>
+                    <td th:text="${character.recentPlay}"></td>
+                </tr>
+                <tr>
+                    <td>캐릭터 성별</td>
+                    <td th:text="${character.gender}"></td>
+                </tr>
+                <tr>
+                    <td>경험치</td>
+                    <td th:text="${character.exp}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+<div th:replace="fragments/footer :: footer"></div>
+
+</html>
