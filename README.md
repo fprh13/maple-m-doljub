@@ -7,24 +7,24 @@
 
 ### 캐릭터 등록
 
-<img src="./images/모바일캐릭터등록.png">
+<img src="./images/모바일캐릭터등록.png" width="300">
 
 ### 캐릭터 등록 폼
 
-<img src="./images/모바일캐릭터등록폼.png">
+<img src="./images/모바일캐릭터등록폼.png" width="300">
 
 ### 캐릭터 목록
 
-<img src="./images/모바일캐릭터목록.png">
+<img src="./images/모바일캐릭터목록.png" width="300">
 
 ### 캐릭터 정보
 
-<img src="./images/모바일캐릭터정보.png">
+<img src="./images/모바일캐릭터정보.png" width="300">
 
 ### 길드 목록
 
-<img src="./images/모바일길드목록.png">
+<img src="./images/모바일길드목록.png" width="300">
 
 ### 길드 원 목록
 
-<img src="./images/모바일길드원.png">
+<img src="./images/모바일길드원.png" width="300">
