@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import maple.doljub.common.auditing.BaseCreateByEntity;
 import maple.doljub.dto.MemberSignUpReqDto;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import static maple.doljub.domain.Role.ROLE_USER;
 @Table(name = "member")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseCreateByEntity {
 
     @Id @GeneratedValue
     private Long id;

@@ -1,3 +1,5 @@
+/******************************** 로그인 회원가입 루트 **************************************/
+
 Grid body > main {
   display: flex;
   flex-direction: column;
@@ -75,8 +77,95 @@ article div:nth-of-type(2) {
     display: block;
   }
 }
+/******************************** 메인 **************************************/
+.main-image img {
+    margin-top: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    width: 420px;
+    height: 420px;
+    margin-bottom: 20px;
+}
+
+.main-image {
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+.main-content {
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+
+/******************************** 푸터 **************************************/
 
 /* Footer */
 body > footer {
   padding: 1rem 0;
 }
+
+/* footer */
+footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   color: white;
+   text-align: center;
+   padding: 10px 0;
+}
+/******************************** 캐릭터 **************************************/
+/* 캐릭터 등록 */
+.character-register {
+    display: flex;
+    justify-content: right; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* 직업 이미지 설정 */
+.job-image {
+    width: 45px;
+    height: auto;
+}
+
+/* 캐릭터 등록 버튼 */
+.plus-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4CAF50; /* 플러스 기호 색 */
+    font-size: 24px; /* 플러스 기호 크기 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+.plus-button:hover {
+    color: #45a049; /* 호버시 배경색 */
+}
+
+/* 캐릭터 목록 */
+.character-list {
+    padding: 20px;
+}
+
+.character-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+.character-empty-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+

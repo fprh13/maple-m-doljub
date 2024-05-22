@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import maple.doljub.common.auditing.BaseCreateByEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 @Table(name = "character")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Character {
+public class Character extends BaseCreateByEntity {
 
     @Id
     @GeneratedValue

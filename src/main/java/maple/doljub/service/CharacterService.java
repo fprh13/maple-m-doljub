@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import maple.doljub.domain.Member;
 import maple.doljub.dto.CharacterRegisterReqDto;
 import maple.doljub.dto.maple.CharacterMapleResDto;
-import maple.doljub.config.RestTemplateClient;
+import maple.doljub.common.config.RestTemplateClient;
 import maple.doljub.domain.Character;
 import maple.doljub.domain.Guild;
 import maple.doljub.repository.CharacterRepository;

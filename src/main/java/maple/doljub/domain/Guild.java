@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import maple.doljub.common.auditing.BaseCreateByEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 @Table(name = "guild")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Guild {
+public class Guild extends BaseCreateByEntity {
 
     @Id @GeneratedValue
     @Column(name = "guild_id")

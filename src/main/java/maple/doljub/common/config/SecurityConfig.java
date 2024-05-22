@@ -1,4 +1,4 @@
-package maple.doljub.config;
+package maple.doljub.common.config;
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -39,7 +39,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/", "/login", "/login/process", "/signup", "/signup/process").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
-                        .requestMatchers("/my/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(
+                                "/character/**",
+                                "/my/**").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()
                 );
         http

@@ -6,9 +6,11 @@
             <li><strong>DolJub m</strong><small> Beta</small></li>
         </ul>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="#">API</a></li>
-            <li><a href="#">Guild</a></li>
+            <li><a href="/">메인</a></li>
+            <th:block sec:authorize="isAuthenticated()">
+                <li><a href="/character">캐릭터 관리</a></li>
+            </th:block>
+            <li><a href="#">길드</a></li>
             <li sec:authorize="isAuthenticated()" ><button class="secondary" onclick="window.location.href='/logout' ">Logout</button></li>
             <li sec:authorize="isAnonymous()" ><button class="secondary" onclick="window.location.href='/login' ">Login</button></li>
         </ul>
