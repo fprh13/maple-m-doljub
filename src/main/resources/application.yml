@@ -29,7 +29,7 @@ spring:
 
 logging:
   level:
-    org.hibernate.SQL: debug # logger? ???
+    org.hibernate.SQL: debug
 
 #  x-nxopen-api-key
 nexon:
