@@ -81,13 +81,24 @@ article div:nth-of-type(2) {
   }
 }
 /******************************** 메인 **************************************/
+@keyframes shadowPulse {
+    0% {
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0px 5px 10px rgba(0, 0, 255, 0.5);
+    }
+    100% {
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    }
+}
 .main-image img {
     margin-top: 50px;
     overflow: hidden;
-    border-radius: 50%;
     width: 420px;
-    height: 420px;
+    height: auto;
     margin-bottom: 20px;
+    animation: shadowPulse 3s infinite;
 }
 
 .main-image {

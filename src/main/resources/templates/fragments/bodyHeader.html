@@ -8,7 +8,7 @@
         <ul>
             <li><a href="/">메인</a></li>
             <th:block sec:authorize="isAuthenticated()">
-                <li><a href="/character">캐릭터 관리</a></li>
+                <li><a href="/character">캐릭터</a></li>
             </th:block>
             <li><a href="/guild">길드</a></li>
             <li sec:authorize="isAuthenticated()" ><button class="secondary" onclick="window.location.href='/logout' ">Logout</button></li>

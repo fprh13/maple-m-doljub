@@ -1,8 +1,8 @@
 package maple.doljub.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import maple.doljub.common.util.JobTranslator;
 import maple.doljub.dto.maple.CharacterMapleResDto;
 
 @Getter
@@ -13,6 +13,7 @@ public class CharacterInfoResDto {
     private String guild;
     private String world;
     private String job;
+    private String jobEnglishName;
     private String gender;
     private long exp;
     private long level;
@@ -23,6 +24,7 @@ public class CharacterInfoResDto {
         this.guild = guild;
         this.world = characterMapleResDto.getWorldName();
         this.job = characterMapleResDto.getCharacterJobName();
+        this.jobEnglishName = JobTranslator.valueOf(characterMapleResDto.getCharacterJobName()).getEnglishName();
         this.gender = characterMapleResDto.getCharacterGender();
         this.exp = characterMapleResDto.getCharacterExp();
         this.level = characterMapleResDto.getCharacterLevel();
