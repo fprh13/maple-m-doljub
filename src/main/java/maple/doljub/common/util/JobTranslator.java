@@ -33,13 +33,13 @@ public enum JobTranslator {
     히어로("Hero"), // 완료
     신궁("Marksman"), // 완료
     섀도어("Shadower"), // 완료
-    아크메이지_썬콜("ArchMageIceLightning"), // 완료
+    아크메이지썬콜("ArchMageIceLightning"), // 완료
     팬텀("Phantom"), // 완료
     은월("Eunwol"), // 완료
     배틀메이지("BattleMage"), // 완료
     메카닉("Mechanic"), // 완료
     와일드헌터("WildHunter"), // 완료
-    아크메이지_불독("ArchMageFirePoison"), // 완료
+    아크메이지불독("ArchMageFirePoison"), // 완료
     데몬어벤져("DemonAvenger"), // 완료
     캐논슈터("CannonShooter"), // 완료
     카이저("Kaiser"), // 완료

@@ -71,6 +71,6 @@ public class CharacterService {
         Character character = characterRepository.findByName(name);
         String ocid = character.getNexonId();
         CharacterMapleResDto mapleResDto = restTemplateClient.getCharacterInfo(ocid);
-        return new CharacterInfoResDto(mapleResDto,character.getGuild().getName());
+        return new CharacterInfoResDto(mapleResDto,character);
     }
 }

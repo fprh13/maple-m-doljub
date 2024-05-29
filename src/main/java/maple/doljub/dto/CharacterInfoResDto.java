@@ -3,6 +3,7 @@ package maple.doljub.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import maple.doljub.common.util.JobTranslator;
+import maple.doljub.domain.Character;
 import maple.doljub.dto.maple.CharacterMapleResDto;
 
 @Getter
@@ -19,16 +20,27 @@ public class CharacterInfoResDto {
     private long level;
     private String recentPlay;
 
-    public CharacterInfoResDto(CharacterMapleResDto characterMapleResDto, String guild) {
+    public CharacterInfoResDto(CharacterMapleResDto characterMapleResDto, Character character) {
         this.name = characterMapleResDto.getCharacterName();
-        this.guild = guild;
+        this.guild = character.getGuild().getName();
         this.world = characterMapleResDto.getWorldName();
-        this.job = characterMapleResDto.getCharacterJobName();
-        this.jobEnglishName = JobTranslator.valueOf(characterMapleResDto.getCharacterJobName()).getEnglishName();
+
+        // 아크메이지 직업군 대비 replace 진행
+        String replaceJob = characterMapleResDto.getCharacterJobName().replaceAll("[(),]", "");
+        this.job = replaceJob;
+        this.jobEnglishName = JobTranslator.valueOf(replaceJob).getEnglishName();
+
         this.gender = characterMapleResDto.getCharacterGender();
         this.exp = characterMapleResDto.getCharacterExp();
         this.level = characterMapleResDto.getCharacterLevel();
-        this.recentPlay = characterMapleResDto.getCharacterDateLastLogin().substring(0, 10); // 년 분 월 만 짜르기
+
+        // 오랜된 유저의 로그인 시간 누락 방지
+        String dateLastLogin = characterMapleResDto.getCharacterDateLastLogin();
+        if (dateLastLogin == null || dateLastLogin.isEmpty()) {
+            this.recentPlay = "-";
+        } else {
+            this.recentPlay = characterMapleResDto.getCharacterDateLastLogin().substring(0, 10); // 년월일만 자르기
+        }
     }
 
 }

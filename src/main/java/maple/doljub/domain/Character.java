@@ -49,8 +49,12 @@ public class Character extends BaseCreateByEntity {
     public Character(String nexonId, String name, String job) {
         this.nexonId = nexonId;
         this.name = name;
-        this.job = job;
-        this.jobEnglishName = JobTranslator.valueOf(job).getEnglishName();
+
+        // 아크메이지 직업군 대비 replace 진행
+        String replaceJob = job.replaceAll("[(),]", "");
+
+        this.job = replaceJob;
+        this.jobEnglishName = JobTranslator.valueOf(replaceJob).getEnglishName();
     }
 
     /**
