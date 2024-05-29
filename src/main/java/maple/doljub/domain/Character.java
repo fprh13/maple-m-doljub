@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import maple.doljub.common.auditing.BaseCreateByEntity;
+import maple.doljub.common.util.JobTranslator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +44,17 @@ public class Character extends BaseCreateByEntity {
 
     private String job;
 
+    private String jobEnglishName;
+
     public Character(String nexonId, String name, String job) {
         this.nexonId = nexonId;
         this.name = name;
-        this.job = job;
+
+        // 아크메이지 직업군 대비 replace 진행
+        String replaceJob = job.replaceAll("[(),]", "");
+
+        this.job = replaceJob;
+        this.jobEnglishName = JobTranslator.valueOf(replaceJob).getEnglishName();
     }
 
     /**

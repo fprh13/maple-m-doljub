@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
+<head th:replace="~{fragments/header :: header}"></head>
 
 <body>
 <!-- Nav -->
-<head th:replace="fragments/bodyHeader :: bodyHeader" />
-<!-- ./ Nav -->
+<head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
 
 
 <!-- Main -->
@@ -63,7 +62,7 @@
 <!-- ./ Main -->
 
 <!-- Footer -->
-<div th:replace="fragments/footer :: footer" />
+<div th:replace="~{fragments/footer :: footer}"></div>
 <!-- ./ Footer -->
 
 <!-- Minimal theme switcher -->

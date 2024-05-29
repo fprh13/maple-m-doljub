@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragments/header :: header"></head>
+<head th:replace="~{fragments/header :: header}"></head>
 
 
 
 <body>
-<head th:replace="fragments/bodyHeader :: bodyHeader"></head>
+<head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
 
 <div class="main-section d-flex align-items-center">
     <div class="container">
@@ -36,7 +36,7 @@
                     </td>
                     <td th:text="${character.job}"></td>
                     <td>
-                        <img th:src="@{'/images/' + ${character.job} + '.png'}" alt="Image of job" class="job-image">
+                        <img th:src="@{'/images/job/' + ${character.jobEnglishName} + '.webp'}" alt="Image of job" class="job-image">
                     </td>
                 </tr>
                 </tbody>
@@ -51,6 +51,6 @@
 </div>
 
 </body>
-<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </html>

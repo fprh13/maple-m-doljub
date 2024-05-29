@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
+<head th:replace="~{fragments/header :: header}"></head>
 <body>
-<head th:replace="fragments/bodyHeader :: bodyHeader" />
+<head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
 
 <div class="main-section d-flex align-items-center">
 <div class="container">
@@ -12,14 +12,19 @@
     <br>
 
     <div class="form-group">
-      <label th:for="name">캐릭터 이름</label>
+      <label th:for="name">닉네임</label>
       <input type="text" th:field="*{name}" class="form-control" placeholder="캐릭터 이름을 입력하세요" />
     </div>
     <br>
-    <div class="form-group">
-      <label th:for="world">월드</label>
-      <input type="text" th:field="*{world}" class="form-control" placeholder="월드를 입력하세요" />
-    </div>
+    <label th:for="world">월드 🌐</label>
+    <select name="world" aria-label="Select your world" required>
+      <option selected disabled value="">
+        월드를 선택하세요.
+      </option>
+      <option th:value="스카니아">스카니아</option>
+      <option th:value="루나">루나</option>
+      <option th:value="오니온">오니온</option>
+    </select>
     <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
     <br>
     <button type="submit" class="btn btn-primary">Submit</button>
@@ -28,6 +33,6 @@
 
 </div>
 </div> <!-- /container -->
-<div th:replace="fragments/footer :: footer" />
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
