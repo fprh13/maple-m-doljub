@@ -3,9 +3,8 @@
 <head th:replace="~{fragments/header :: header}">
 
 
-
 <body>
-<head th:replace="~{fragments/bodyHeader :: bodyHeader}">
+<head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
 
 <div class="main-section d-flex align-items-center">
     <div class="container">
@@ -22,13 +21,42 @@
                 <h2>Welcome</h2>
             </th:block>
         </div>
+        <div class="main-search">
+        <form th:action="@{/character/search{name}(name=${name})}" method="get">
+            <h2>캐릭터 검색</h2>
+            <div class="form-group">
+                <label th:for="name">닉네임</label>
+                <input type="text" name="name" class="form-control" placeholder="캐릭터 이름을 입력하세요" th:value="${name}" />
+            </div>
+            <label th:for="world">월드 🌐</label>
+            <select name="world" aria-label="Select your world" required>
+                <option selected disabled value="">
+                    월드를 선택하세요.
+                </option>
+                <option th:value="스카니아">스카니아</option>
+                <option th:value="루나">루나</option>
+                <option th:value="오니온">오니온</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
     </div>
 
 </div>
+
+<details role="list">
+    <summary>Theme</summary>
+    <ul>
+        <li><a href="#" data-theme-switcher="light">Light</a></li>
+        <li><a href="#" data-theme-switcher="dark">Dark</a></li>
+        <li><a href="#" data-theme-switcher="auto">Auto</a></li>
+    </ul>
+</details>
 
 </body>
 
 <!--footer-->
 <div th:replace="~{fragments/footer :: footer}"></div>
+
 
 </html>
