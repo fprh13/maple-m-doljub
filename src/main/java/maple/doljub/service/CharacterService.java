@@ -46,7 +46,7 @@ public class CharacterService {
         Guild findGuild = guildRepository.findByName(guildName);
         if (findGuild == null) {
             // 없는 길드라면 새로운 길드 객체 생성
-            Guild guild = new Guild(guildName);
+            Guild guild = new Guild(guildName, characterInfo.getWorldName());
 
             Character character = Character.createCharacter(mapleCharacter, member, guild);
             return characterRepository.save(character).getId();

@@ -9,21 +9,17 @@
 
     <div class="main-section d-flex align-items-center">
         <div class="container">
-            <!-- 메인 섹션 내용 -->
-
             <div class="character-list">
                 <table th:if="${!guilds.isEmpty()}">
-                    <thead>
-                    <tr>
-                        <th>길드명</th>
-                    </tr>
-                    </thead>
                     <tbody>
                     <tr th:each="guild : ${guilds}">
                         <td>
                             <a th:href="@{/guild/info/{name}(name=${guild.name})}">
                                 <span th:text="${guild.name}"></span>
                             </a>
+                        </td>
+                        <td>
+                            <span th:text="${guild.world}"></span>
                         </td>
                     </tr>
                     </tbody>

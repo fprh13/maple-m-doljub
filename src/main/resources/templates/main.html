@@ -9,30 +9,38 @@
 <div class="main-section d-flex align-items-center">
     <div class="container">
         <!-- 메인 섹션 내용 -->
-        <div class="main-image">
-            <img src="./images/main.png" alt="">
+<!--        <div class="main-image">-->
+<!--            <img src="./images/main.png" alt="">-->
+<!--        </div>-->
+        <div class="main-search">
+            <form th:action="@{/character/search{name}(name=${name})}" method="get">
+                <h3>캐릭터 검색</h3>
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" placeholder="캐릭터 이름을 입력하세요." th:value="${name}" />
+                </div>
+                <select name="world" aria-label="Select your world" required>
+                    <option selected disabled value="">
+                        월드를 선택하세요.
+                    </option>
+                    <option th:value="스카니아">스카니아</option>
+                    <option th:value="루나">루나</option>
+                    <option th:value="오니온">오니온</option>
+                </select>
+                <br>
+                <small th:if="${characterError}" style="color: red" th:text="${characterError}">캐릭터를 찾을 수 없습니다.</small>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
         <div class="main-search">
-        <form th:action="@{/character/search{name}(name=${name})}" method="get">
-            <h3>캐릭터 검색</h3>
-            <div class="form-group">
-                <label th:for="name">닉네임</label>
-                <input type="text" name="name" class="form-control" placeholder="캐릭터 이름을 입력하세요" th:value="${name}" />
-            </div>
-            <label th:for="world">월드 🌐</label>
-            <select name="world" aria-label="Select your world" required>
-                <option selected disabled value="">
-                    월드를 선택하세요.
-                </option>
-                <option th:value="스카니아">스카니아</option>
-                <option th:value="루나">루나</option>
-                <option th:value="오니온">오니온</option>
-            </select>
-            <br>
-            <small th:if="${error}" style="color: red" th:text="${error}">캐릭터를 찾을 수 없습니다.</small>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+            <form th:action="@{/guild/search{name}(name=${name})}" method="get">
+                <h3>길드 검색</h3>
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" placeholder="길드명 입력을 입력해주세요." th:value="${name}" />
+                </div>
+                <small th:if="${guildError}" style="color: red" th:text="${guildError}">길드를 찾을 수 없습니다.</small>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
 
 </div>

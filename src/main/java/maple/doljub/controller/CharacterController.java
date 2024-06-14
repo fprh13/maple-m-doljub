@@ -36,7 +36,7 @@ public class CharacterController {
             characterService.join(characterRegisterReqDto);
             return "redirect:/character";
         } catch (CustomException e) {
-            redirectAttributes.addFlashAttribute("error", "캐릭터를 찾을 수 없습니다.");
+            redirectAttributes.addFlashAttribute("characterError", "캐릭터를 찾을 수 없습니다.");
             return "redirect:/character/register";
         }
     }
