@@ -36,7 +36,7 @@ public class CharacterController {
             characterService.join(characterRegisterReqDto);
             return "redirect:/character";
         } catch (CustomException e) {
-            redirectAttributes.addFlashAttribute("characterError", "캐릭터를 찾을 수 없습니다.");
+            redirectAttributes.addFlashAttribute("error", "캐릭터를 찾을 수 없습니다.");
             return "redirect:/character/register";
         }
     }
@@ -46,18 +46,15 @@ public class CharacterController {
      */
     @GetMapping("/character")
     public String characterList(Model model) {
-        Member member = characterService.findMyCharacters();
-        if (member != null) {
-            List<Character> characters = member.getCharacters();
-            if (characters != null) {
-                model.addAttribute("characters", characters);
-            } else {
-                model.addAttribute("characters", Collections.emptyList()); // Empty list if characters are null
-            }
-        } else {
-            model.addAttribute("characters", Collections.emptyList()); // Empty list if user is null
-        }
+        List<Character> characters = findCharactersIfExists();
+        model.addAttribute("characters", characters);
         return "character";
+    }
+
+    /*캐릭터의 유무에 맞게 반환*/
+    private List<Character> findCharactersIfExists() {
+        Member member = characterService.findMyCharacters();
+        return (member != null) ? member.getCharacters() : Collections.emptyList();
     }
 
     /**
@@ -76,7 +73,7 @@ public class CharacterController {
             model.addAttribute("character", characterInfoResDto);
             return "characterInfo";
         } catch (CustomException e) {
-            redirectAttributes.addFlashAttribute("error", "캐릭터를 찾을 수 없습니다.");
+            redirectAttributes.addFlashAttribute("characterError", "캐릭터를 찾을 수 없습니다.");
             return "redirect:/";
         }
     }

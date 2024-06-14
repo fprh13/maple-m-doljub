@@ -33,17 +33,9 @@ public class GuildController {
     @GetMapping("/guild/info/{name}")
     public String guildInfo(Model model, @PathVariable("name") String name) {
         Guild guild = guildService.guildInfo(name);
-        if (guild != null) {
-            List<Character> characters = guild.getCharacters();
-            if (characters != null) {
-                model.addAttribute("guild", guild);
-                model.addAttribute("characters", characters);
-            } else {
-                model.addAttribute("characters", Collections.emptyList()); // Empty list if characters are null
-            }
-        } else {
-            model.addAttribute("characters", Collections.emptyList()); // Empty list if user is null
-        }
+        List<Character> characters = (guild != null) ? guild.getCharacters() : Collections.emptyList();
+        model.addAttribute("guild", guild);
+        model.addAttribute("characters", characters);
         return "guildInfo";
     }
 
@@ -53,7 +45,6 @@ public class GuildController {
         if (guild != null) {
             String encodedName = URLEncoder.encode(guild.getName(), StandardCharsets.UTF_8);
             return "redirect:/guild/info/" + encodedName;
-
         } else {
             redirectAttributes.addFlashAttribute("guildError", "해당 길드를 찾을 수 없습니다.");
             return "redirect:/";
