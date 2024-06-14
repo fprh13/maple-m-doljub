@@ -28,6 +28,8 @@
                 <option th:value="루나">루나</option>
                 <option th:value="오니온">오니온</option>
             </select>
+            <br>
+            <small th:if="${error}" style="color: red" th:text="${error}">캐릭터를 찾을 수 없습니다.</small>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

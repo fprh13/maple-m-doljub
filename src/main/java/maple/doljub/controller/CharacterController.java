@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import maple.doljub.common.exception.CustomException;
 import maple.doljub.domain.Character;
 import maple.doljub.domain.Member;
+import maple.doljub.dto.CharacterInfoResDto;
 import maple.doljub.dto.CharacterRegisterReqDto;
 import maple.doljub.service.CharacterService;
 import org.springframework.stereotype.Controller;
@@ -33,11 +34,11 @@ public class CharacterController {
     public String characterRegistrationProcess(CharacterRegisterReqDto characterRegisterReqDto, RedirectAttributes redirectAttributes) {
         try {
             characterService.join(characterRegisterReqDto);
+            return "redirect:/character";
         } catch (CustomException e) {
             redirectAttributes.addFlashAttribute("error", "캐릭터를 찾을 수 없습니다.");
             return "redirect:/character/register";
         }
-        return "redirect:/character";
     }
 
     /**
@@ -69,8 +70,14 @@ public class CharacterController {
     }
 
     @GetMapping("/character/search")
-    public String characterInfoOther(Model model, @RequestParam("name") String name, @RequestParam("world") String world) {
-        model.addAttribute("character", characterService.search(name,world));
-        return "characterInfo";
+    public String characterInfoOther(Model model, RedirectAttributes redirectAttributes , @RequestParam("name") String name, @RequestParam("world") String world) {
+        try {
+            CharacterInfoResDto characterInfoResDto = characterService.search(name, world);
+            model.addAttribute("character", characterInfoResDto);
+            return "characterInfo";
+        } catch (CustomException e) {
+            redirectAttributes.addFlashAttribute("error", "캐릭터를 찾을 수 없습니다.");
+            return "redirect:/";
+        }
     }
 }

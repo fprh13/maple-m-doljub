@@ -42,12 +42,13 @@ public class SecurityConfig {
                                 "/login/process",
                                 "/signup",
                                 "/signup/process",
-                                "/guild/**",
-                                "/character/search**",
+                                "/guild/**", // 길드 정보
+                                "/character/search**", // 캐릭터 검색
+                                "/character/info/**", // 캐릭터 조회
                                 "/error").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .requestMatchers(
-                                "/character/**",
+                                "/character/**", // 검색 조회 제외한 캐릭터 작업은 로그인한 유저 허용
                                 "/my/**").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()
                 );
