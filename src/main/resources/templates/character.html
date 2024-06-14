@@ -34,15 +34,17 @@
                             <span th:text="${character.name}"></span>
                         </a>
                     </td>
-                    <td th:text="${character.job}"></td>
                     <td>
-                        <img th:src="@{'/images/job/' + ${character.jobEnglishName} + '.webp'}" alt="Image of job" class="job-image">
+                        <div class="job-info">
+                            <div class="job-name" th:text="${character.job}"></div>
+                            <img th:src="@{'/images/job/' + ${character.jobEnglishName} + '.webp'}" alt="Image of job" class="job-image">
+                        </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <img th:if="${characters.isEmpty()}" src="./images/charactor-empty.png" alt="" class="character-empty-image">
             <div th:if="${characters.isEmpty()}" class="character-empty">
+                <img th:if="${characters.isEmpty()}" src="./images/charater-empty.png" alt="">
                 <span>등록된 캐릭터가 없습니다...</span>
             </div>
         </div>

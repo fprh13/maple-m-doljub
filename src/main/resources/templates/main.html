@@ -10,20 +10,11 @@
     <div class="container">
         <!-- 메인 섹션 내용 -->
         <div class="main-image">
-            <img src="./images/main.jpg" alt="">
-        </div>
-        <div class="main-content">
-            <th:block sec:authorize="isAnonymous()">
-                <h2>회원가입하고 캐릭터 등록 !</h2>
-            </th:block>
-
-            <th:block sec:authorize="isAuthenticated()">
-                <h2>Welcome</h2>
-            </th:block>
+            <img src="./images/main.png" alt="">
         </div>
         <div class="main-search">
         <form th:action="@{/character/search{name}(name=${name})}" method="get">
-            <h2>캐릭터 검색</h2>
+            <h3>캐릭터 검색</h3>
             <div class="form-group">
                 <label th:for="name">닉네임</label>
                 <input type="text" name="name" class="form-control" placeholder="캐릭터 이름을 입력하세요" th:value="${name}" />
@@ -43,15 +34,6 @@
     </div>
 
 </div>
-
-<details role="list">
-    <summary>Theme</summary>
-    <ul>
-        <li><a href="#" data-theme-switcher="light">Light</a></li>
-        <li><a href="#" data-theme-switcher="dark">Dark</a></li>
-        <li><a href="#" data-theme-switcher="auto">Auto</a></li>
-    </ul>
-</details>
 
 </body>
 

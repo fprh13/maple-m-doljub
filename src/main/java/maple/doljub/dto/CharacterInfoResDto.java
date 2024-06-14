@@ -20,9 +20,9 @@ public class CharacterInfoResDto {
     private long level;
     private String recentPlay;
 
-    public CharacterInfoResDto(CharacterMapleResDto characterMapleResDto, Character character) {
+    public CharacterInfoResDto(CharacterMapleResDto characterMapleResDto, String guild) {
         this.name = characterMapleResDto.getCharacterName();
-        this.guild = character.getGuild().getName();
+        this.guild = guild;
         this.world = characterMapleResDto.getWorldName();
 
         // 아크메이지 직업군 대비 replace 진행
@@ -42,5 +42,7 @@ public class CharacterInfoResDto {
             this.recentPlay = characterMapleResDto.getCharacterDateLastLogin().substring(0, 10); // 년월일만 자르기
         }
     }
+
+
 
 }

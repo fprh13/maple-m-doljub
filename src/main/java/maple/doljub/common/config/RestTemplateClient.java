@@ -2,6 +2,8 @@ package maple.doljub.common.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import maple.doljub.common.exception.CustomException;
+import maple.doljub.common.exception.ErrorCode;
 import maple.doljub.dto.CharacterRegisterReqDto;
 import maple.doljub.dto.maple.CharacterMapleResDto;
 import maple.doljub.dto.maple.GuildMapleResDto;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
@@ -44,23 +48,28 @@ public class RestTemplateClient {
         headers.set("x-nxopen-api-key", API_KEY);
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        // HTTP 요청 보내기
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        OcidMapleResDto ocidDto;
         try {
+            // HTTP 요청 보내기
+            HttpEntity<String> entity = new HttpEntity<>(headers);
+
+            ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            OcidMapleResDto ocidDto;
             ocidDto = objectMapper.readValue(responseEntity.getBody(), OcidMapleResDto.class);
             return ocidDto.getOcid();
         } catch (JsonProcessingException e) {
             // 처리할 수 없는 예외 처리
-            e.printStackTrace();
-            throw new RuntimeException();
+            throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            // HTTP 요청 예외 처리
+            String errorMessage = "HTTP error: " + e.getStatusCode() + " - " + e.getResponseBodyAsString();
+            throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            // 기타 예외 처리
+            throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
+
         }
-
-
     }
 
     public CharacterMapleResDto getCharacterInfo(String ocid) {

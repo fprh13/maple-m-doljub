@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 
 
 @Configuration
@@ -29,15 +30,21 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
+		requestCache.setMatchingRequestParameterName("null");
 
         http
+                .requestCache(request -> request
+                        .requestCache(requestCache))
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/",
                                 "/login",
                                 "/login/process",
                                 "/signup",
                                 "/signup/process",
-                                "/guild/**").permitAll()
+                                "/guild/**",
+                                "/character/search**",
+                                "/error").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .requestMatchers(
                                 "/character/**",

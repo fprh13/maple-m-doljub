@@ -92,9 +92,9 @@ article div:nth-of-type(2) {
 .main-image img {
     margin-top: 50px;
     overflow: hidden;
-    width: 420px;
+    width: 360px;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     animation: shadowPulse 3s infinite;
 }
 
@@ -111,7 +111,8 @@ article div:nth-of-type(2) {
 }
 
 .main-search {
-    width: 420px;
+    margin-top: 100px;
+    text-align: center;
     display: flex;
     justify-content: center; /* 수평 가운데 정렬 */
     align-items: center; /* 수직 가운데 정렬 */
@@ -152,7 +153,7 @@ footer {
 
 /* 직업 이미지 설정 */
 .job-image {
-    width: 45px;
+    width: 35px;
     height: auto;
 }
 
@@ -170,9 +171,39 @@ footer {
     color: #45a049; /* 호버시 배경색 */
 }
 
+.job-info {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.job-name {
+    font-weight: bold;
+    font-size: 14px; /* Set font size to 8px */
+    margin-right: 10px; /* Adjust spacing between job name and image */
+}
+
 /* 캐릭터 목록 */
 .character-list {
     padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.character-list > h3 {
+    text-align: center;
+}
+
+td:first-child {
+    font-weight: bold;
+}
+
+td:not(:first-child):not(:last-child) {
+    text-align: right;
+}
+
+td:last-child {
+    text-align: right;
 }
 
 .character-empty {
@@ -180,6 +211,7 @@ footer {
     justify-content: center;
     align-items: center;
     height: 30vh;
+    flex-direction: column; /* 세로 정렬 설정 */
 }
 
 .character-empty-image {

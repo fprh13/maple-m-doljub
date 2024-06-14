@@ -1,15 +1,15 @@
 package maple.doljub.controller;
 
 import lombok.RequiredArgsConstructor;
+import maple.doljub.common.exception.CustomException;
 import maple.doljub.domain.Character;
 import maple.doljub.domain.Member;
 import maple.doljub.dto.CharacterRegisterReqDto;
 import maple.doljub.service.CharacterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Collections;
 import java.util.List;
@@ -30,8 +30,13 @@ public class CharacterController {
      * 캐릭터 등록
      */
     @PostMapping("/character/register/process")
-    public String characterRegistrationProcess(CharacterRegisterReqDto characterRegisterReqDto) {
-        characterService.join(characterRegisterReqDto);
+    public String characterRegistrationProcess(CharacterRegisterReqDto characterRegisterReqDto, RedirectAttributes redirectAttributes) {
+        try {
+            characterService.join(characterRegisterReqDto);
+        } catch (CustomException e) {
+            redirectAttributes.addFlashAttribute("error", "캐릭터를 찾을 수 없습니다.");
+            return "redirect:/character/register";
+        }
         return "redirect:/character";
     }
 
@@ -63,8 +68,9 @@ public class CharacterController {
         return "characterInfo";
     }
 
-    /**
-     *
-     */
-
+    @GetMapping("/character/search")
+    public String characterInfoOther(Model model, @RequestParam("name") String name, @RequestParam("world") String world) {
+        model.addAttribute("character", characterService.search(name,world));
+        return "characterInfo";
+    }
 }

@@ -27,6 +27,7 @@
     </select>
     <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
     <br>
+    <small th:if="${error}" style="color: red" th:text="${error}">캐릭터를 찾을 수 없습니다.</small>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 
