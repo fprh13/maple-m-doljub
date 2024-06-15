@@ -234,6 +234,11 @@ td:last-child {
     align-items: center;
 }
 
+.fieldError {
+    border-color: red;
+    color: red;
+}
+
 
 
 

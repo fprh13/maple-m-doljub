@@ -10,7 +10,7 @@
     <div class="container">
         <div class="main-search">
             <form th:action="@{/character/search{name}(name=${name})}" method="get">
-                <h3>캐릭터 검색</h3>
+                <h3 style="padding-left: 50px;">캐릭터 검색 <img src="/images/search.gif" alt=""></h3>
                 <div class="form-group">
                     <input type="text" name="name" class="form-control" placeholder="캐릭터 이름을 입력하세요." th:value="${name}" />
                 </div>
@@ -29,7 +29,7 @@
         </div>
         <div class="main-search">
             <form th:action="@{/guild/search{name}(name=${name})}" method="get">
-                <h3>길드 검색</h3>
+                <h3 style="padding-left: 50px;">길드 검색 <img src="/images/search.gif" alt=""></h3>
                 <div class="form-group">
                     <input type="text" name="name" class="form-control" placeholder="길드명 입력을 입력해주세요." th:value="${name}" />
                 </div>

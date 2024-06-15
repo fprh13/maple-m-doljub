@@ -18,12 +18,12 @@ public class MemberService {
 
     @Transactional
     public void join(MemberSignUpReqDto memberSignUpReqDto) {
-        boolean isMember = memberRepository.existsByLoginId(memberSignUpReqDto.getLoginId());
-        if (isMember) {
-            return;
-        }
         Member member = Member.of(memberSignUpReqDto, bCryptPasswordEncoder.encode(memberSignUpReqDto.getPassword()));
         memberRepository.save(member);
+    }
+
+    public boolean existsByLoginId(String loginId) {
+        return memberRepository.existsByLoginId(loginId);
     }
 
 
