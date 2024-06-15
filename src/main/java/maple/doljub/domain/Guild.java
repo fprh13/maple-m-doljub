@@ -30,9 +30,12 @@ public class Guild extends BaseCreateByEntity {
 
     private String name; // 길드 이름
 
+    private String world; // 월드 이름
 
-    public Guild(String name) {
+
+    public Guild(String name, String world) {
         this.name = name;
+        this.world = world;
     }
 
     /**

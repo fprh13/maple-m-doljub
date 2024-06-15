@@ -4,35 +4,32 @@
 <body>
 <head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
 
-<div class="main-section d-flex align-items-center">
-<div class="container">
-
-  <form th:object="${characterDto}" action="/character/register/process", method="post">
-    <h2>캐릭터 등록</h2>
-    <br>
-
-    <div class="form-group">
-      <label th:for="name">닉네임</label>
-      <input type="text" th:field="*{name}" class="form-control" placeholder="캐릭터 이름을 입력하세요" />
-    </div>
-    <br>
-    <label th:for="world">월드 🌐</label>
-    <select name="world" aria-label="Select your world" required>
-      <option selected disabled value="">
-        월드를 선택하세요.
-      </option>
-      <option th:value="스카니아">스카니아</option>
-      <option th:value="루나">루나</option>
-      <option th:value="오니온">오니온</option>
-    </select>
-    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-    <br>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-
-
+<div class="main-section">
+  <div class="container">
+    <form th:object="${characterDto}" action="/character/register/process", method="post">
+      <h2>캐릭터 등록</h2>
+      <br>
+      <div class="form-group">
+        <label th:for="name">닉네임</label>
+        <input type="text" th:field="*{name}" class="form-control" placeholder="캐릭터 이름을 입력하세요" />
+      </div>
+      <br>
+      <label th:for="world">월드 🌐</label>
+      <select name="world" aria-label="Select your world" required>
+        <option selected disabled value="">
+          월드를 선택하세요.
+        </option>
+        <option th:value="스카니아">스카니아</option>
+        <option th:value="루나">루나</option>
+        <option th:value="오니온">오니온</option>
+      </select>
+      <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+      <br>
+      <small th:if="${error}" style="color: red" th:text="${error}">캐릭터를 찾을 수 없습니다.</small>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
 </div>
-</div> <!-- /container -->
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

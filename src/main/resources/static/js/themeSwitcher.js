@@ -1,18 +1,11 @@
-/*!
- * Minimal theme switcher
- *
- * Pico.css - https://picocss.com
- * Copyright 2019-2023 - Licensed under MIT
- */
-
 const themeSwitcher = {
   // Config
-  _scheme: "auto",
+  _scheme: "dark",
   menuTarget: "details[role='list']",
   buttonsTarget: "a[data-theme-switcher]",
   buttonAttribute: "data-theme-switcher",
   rootAttribute: "data-theme",
-  localStorageKey: "picoPreferredColorScheme",
+  localStorageKey: "theme-mode",
 
   // Init
   init() {
@@ -84,3 +77,4 @@ const themeSwitcher = {
 
 // Init
 themeSwitcher.init();
+

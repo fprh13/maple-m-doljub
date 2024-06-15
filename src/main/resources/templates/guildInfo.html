@@ -2,27 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/header :: header}"></head>
 
-
-
 <body>
 <head th:replace="~{fragments/bodyHeader :: bodyHeader}">
-
-    <div class="main-section d-flex align-items-center">
+    <div class="main-section">
         <div class="container">
-            <!-- 메인 섹션 내용 -->
-
             <h2 th:text="${guild.name}"></h2>
-
-
             <div class="character-list">
                 <table th:if="${!characters.isEmpty()}">
-                    <thead>
-                    <tr>
-                        <th>닉네임</th>
-                        <th>직업</th>
-                        <th>🍁</th>
-                    </tr>
-                    </thead>
                     <tbody>
                     <tr th:each="character : ${characters}">
                         <td>
@@ -30,9 +16,11 @@
                                 <span th:text="${character.name}"></span>
                             </a>
                         </td>
-                        <td th:text="${character.job}"></td>
                         <td>
-                            <img th:src="@{'/images/job/' + ${character.jobEnglishName} + '.webp'}" alt="Image of job" class="job-image">
+                            <div class="job-info">
+                                <div class="job-name" th:text="${character.job}"></div>
+                                <img th:src="@{'/images/job/' + ${character.jobEnglishName} + '.webp'}" alt="Image of job" class="job-image">
+                            </div>
                         </td>
                     </tr>
                     </tbody>
@@ -43,10 +31,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </body>
 <div th:replace="~{fragments/footer :: footer}"></div>
-
 </html>

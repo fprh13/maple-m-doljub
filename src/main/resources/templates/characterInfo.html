@@ -6,21 +6,15 @@
 <body>
 <head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
 
-<div class="main-section d-flex align-items-center">
+<div class="main-section">
     <div class="container">
         <!-- 메인 섹션 내용 -->
         <div class="main-image">
             <img th:src="@{'/images/job/' + ${character.jobEnglishName} + '.webp'}" alt="Image of job">
         </div>
         <div class="character-list">
-
+            <h3>기본&스탯</h3>
             <table>
-                <thead>
-                <tr>
-                    <th>🍁</th>
-                    <th>🔥</th>
-                </tr>
-                </thead>
                 <tbody>
                 <tr>
                     <td>레벨</td>

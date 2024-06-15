@@ -46,7 +46,7 @@ public class CharacterService {
         Guild findGuild = guildRepository.findByName(guildName);
         if (findGuild == null) {
             // 없는 길드라면 새로운 길드 객체 생성
-            Guild guild = new Guild(guildName);
+            Guild guild = new Guild(guildName, characterInfo.getWorldName());
 
             Character character = Character.createCharacter(mapleCharacter, member, guild);
             return characterRepository.save(character).getId();
@@ -71,6 +71,15 @@ public class CharacterService {
         Character character = characterRepository.findByName(name);
         String ocid = character.getNexonId();
         CharacterMapleResDto mapleResDto = restTemplateClient.getCharacterInfo(ocid);
-        return new CharacterInfoResDto(mapleResDto,character);
+        return new CharacterInfoResDto(mapleResDto,character.getGuild().getName());
+    }
+
+    public CharacterInfoResDto search(String name, String world) {
+        CharacterRegisterReqDto characterRegisterReqDto = CharacterRegisterReqDto.builder()
+                .name(name).world(world).build();
+        String ocid = restTemplateClient.getOcid(characterRegisterReqDto);
+        CharacterMapleResDto mapleResDto = restTemplateClient.getCharacterInfo(ocid);
+        String guild = restTemplateClient.getGuildInfo(ocid);
+        return new CharacterInfoResDto(mapleResDto,guild);
     }
 }

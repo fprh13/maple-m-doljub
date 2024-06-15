@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>내 정보 페이지</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/header :: header}">
 
+<body>
+<head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
+
+<div class="main-section">
+    <div class="container">
+        <details id="theme-dropdown">
+            <summary id="theme">Theme</summary>
+            <ul>
+                <li><a href="#" data-theme-switcher="light">Light</a></li>
+                <li><a href="#" data-theme-switcher="dark">Dark</a></li>
+                <li><a href="#" data-theme-switcher="auto">Auto</a></li>
+            </ul>
+        </details>
+    </div>
+</div>
 </body>
+
+<!--footer-->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+
 </html>

@@ -22,4 +22,8 @@ public class GuildService {
     public Guild guildInfo(String name) {
         return guildRepository.findCharactersByName(name);
     }
+
+    public Guild guildSearch(String name) {
+        return guildRepository.findByName(name);
+    }
 }

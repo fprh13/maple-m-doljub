@@ -3,11 +3,8 @@
 <head th:replace="~{fragments/header :: header}"></head>
 
 <body>
-<!-- Nav -->
 <head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
 
-
-<!-- Main -->
 <main class="container">
     <article class="grid">
         <div>
@@ -56,17 +53,9 @@
                 <button type="submit" class="contrast" >Submit</button>
             </form>
         </div>
-        <div></div>
     </article>
 </main>
-<!-- ./ Main -->
-
-<!-- Footer -->
 <div th:replace="~{fragments/footer :: footer}"></div>
-<!-- ./ Footer -->
-
-<!-- Minimal theme switcher -->
-<script src="./js/minimal-theme-switcher.js"></script>
 <script>
     function validateForm() {
         var password = document.getElementsByName("password")[0].value;

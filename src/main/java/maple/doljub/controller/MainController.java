@@ -18,18 +18,7 @@ public class MainController {
     private final CharacterService characterService;
 
     @GetMapping("/")
-    public String main(Model model) {
-        Member member = characterService.findMyCharacters();
-        if (member != null) {
-            List<Character> characters = member.getCharacters();
-            if (characters != null) {
-                model.addAttribute("characters", characters);
-            } else {
-                model.addAttribute("characters", Collections.emptyList()); // Empty list if characters are null
-            }
-        } else {
-            model.addAttribute("characters", Collections.emptyList()); // Empty list if user is null
-        }
+    public String main() {
         return "main";
     }
 

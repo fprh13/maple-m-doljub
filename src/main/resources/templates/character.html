@@ -2,22 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/header :: header}"></head>
 
-
-
 <body>
 <head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
 
-<div class="main-section d-flex align-items-center">
+<div class="main-section">
     <div class="container">
-        <!-- 메인 섹션 내용 -->
-
 <!--        캐릭터 등록 하기-->
         <div class="character-register" >
             <a href="/character/register" class="plus-button">
                 + 새 캐릭터 등록
             </a>
         </div>
-
         <div class="character-list">
             <table th:if="${!characters.isEmpty()}">
                 <thead>
@@ -34,23 +29,22 @@
                             <span th:text="${character.name}"></span>
                         </a>
                     </td>
-                    <td th:text="${character.job}"></td>
                     <td>
-                        <img th:src="@{'/images/job/' + ${character.jobEnglishName} + '.webp'}" alt="Image of job" class="job-image">
+                        <div class="job-info">
+                            <div class="job-name" th:text="${character.job}"></div>
+                            <img th:src="@{'/images/job/' + ${character.jobEnglishName} + '.webp'}" alt="Image of job" class="job-image">
+                        </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <img th:if="${characters.isEmpty()}" src="./images/charactor-empty.png" alt="" class="character-empty-image">
             <div th:if="${characters.isEmpty()}" class="character-empty">
+                <img th:if="${characters.isEmpty()}" src="./images/charater-empty.png" alt="">
                 <span>등록된 캐릭터가 없습니다...</span>
             </div>
         </div>
     </div>
-
 </div>
-
 </body>
 <div th:replace="~{fragments/footer :: footer}"></div>
-
 </html>

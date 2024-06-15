@@ -1,15 +1,16 @@
 package maple.doljub.controller;
 
 import lombok.RequiredArgsConstructor;
+import maple.doljub.common.exception.CustomException;
 import maple.doljub.domain.Character;
 import maple.doljub.domain.Member;
+import maple.doljub.dto.CharacterInfoResDto;
 import maple.doljub.dto.CharacterRegisterReqDto;
 import maple.doljub.service.CharacterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Collections;
 import java.util.List;
@@ -30,9 +31,14 @@ public class CharacterController {
      * 캐릭터 등록
      */
     @PostMapping("/character/register/process")
-    public String characterRegistrationProcess(CharacterRegisterReqDto characterRegisterReqDto) {
-        characterService.join(characterRegisterReqDto);
-        return "redirect:/character";
+    public String characterRegistrationProcess(CharacterRegisterReqDto characterRegisterReqDto, RedirectAttributes redirectAttributes) {
+        try {
+            characterService.join(characterRegisterReqDto);
+            return "redirect:/character";
+        } catch (CustomException e) {
+            redirectAttributes.addFlashAttribute("error", "캐릭터를 찾을 수 없습니다.");
+            return "redirect:/character/register";
+        }
     }
 
     /**
@@ -40,18 +46,15 @@ public class CharacterController {
      */
     @GetMapping("/character")
     public String characterList(Model model) {
-        Member member = characterService.findMyCharacters();
-        if (member != null) {
-            List<Character> characters = member.getCharacters();
-            if (characters != null) {
-                model.addAttribute("characters", characters);
-            } else {
-                model.addAttribute("characters", Collections.emptyList()); // Empty list if characters are null
-            }
-        } else {
-            model.addAttribute("characters", Collections.emptyList()); // Empty list if user is null
-        }
+        List<Character> characters = findCharactersIfExists();
+        model.addAttribute("characters", characters);
         return "character";
+    }
+
+    /*캐릭터의 유무에 맞게 반환*/
+    private List<Character> findCharactersIfExists() {
+        Member member = characterService.findMyCharacters();
+        return (member != null) ? member.getCharacters() : Collections.emptyList();
     }
 
     /**
@@ -63,8 +66,15 @@ public class CharacterController {
         return "characterInfo";
     }
 
-    /**
-     *
-     */
-
+    @GetMapping("/character/search")
+    public String characterInfoOther(Model model, RedirectAttributes redirectAttributes , @RequestParam("name") String name, @RequestParam("world") String world) {
+        try {
+            CharacterInfoResDto characterInfoResDto = characterService.search(name, world);
+            model.addAttribute("character", characterInfoResDto);
+            return "characterInfo";
+        } catch (CustomException e) {
+            redirectAttributes.addFlashAttribute("characterError", "캐릭터를 찾을 수 없습니다.");
+            return "redirect:/";
+        }
+    }
 }

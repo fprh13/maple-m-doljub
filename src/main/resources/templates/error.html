@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/header :: header}">
+<body>
+<head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
+
+<div class="main-section">
+    <div class="error">
+        <div class="error-image">
+            <img src="/images/error.gif" alt="">
+        </div>
+        <h4 th:text="|Error: ${status} ${error}|"></h4>
+    </div>
+</div>
+</body>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</html>
