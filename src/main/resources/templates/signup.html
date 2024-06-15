@@ -8,7 +8,7 @@
     <article class="grid">
         <div>
             <hgroup>
-                <h1>회원가입</h1>
+                <h1>회원가입 <img style="max-width: 33px;" src="/images/signupIcon.png" alt=""></h1>
                 <p>아래 필드를 모두 채워 주세요.</p>
             </hgroup>
             <form th:object="${signupDto}" action="/signup/process", method="post" onsubmit="return validateForm()">

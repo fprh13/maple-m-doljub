@@ -4,6 +4,12 @@
 
 <body>
 <head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
+<div class="title" style="background-image: url('/images/background/background-characterList.jpg');">
+    <h1>
+        <span>캐릭터 관리</span>
+        <img style="max-width: 33px;" src="/images/characterList.png" alt="">
+    </h1>
+</div>
 
 <div class="main-section">
     <div class="container">
@@ -15,13 +21,6 @@
         </div>
         <div class="character-list">
             <table th:if="${!characters.isEmpty()}">
-                <thead>
-                <tr>
-                    <th>닉네임</th>
-                    <th>직업</th>
-                    <th></th>
-                </tr>
-                </thead>
                 <tbody>
                 <tr th:each="character : ${characters}">
                     <td>
