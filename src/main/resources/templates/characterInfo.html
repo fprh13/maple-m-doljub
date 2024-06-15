@@ -13,7 +13,7 @@
             <img th:src="@{'/images/job/' + ${character.jobEnglishName} + '.webp'}" alt="Image of job">
         </div>
         <div class="character-list">
-            <h3>기본&스탯</h3>
+            <h3>기본&스탯<img style="max-width: 33px; margin-left: 5px;" src="/images/state.png" alt=""></h3>
             <table>
                 <tbody>
                 <tr>
@@ -49,6 +49,21 @@
                     <td th:text="${character.exp}"></td>
                 </tr>
                 </tbody>
+            </table>
+        </div>
+
+        <div class="character-list">
+            <h3>장비<img style="max-width: 33px; margin-left: 5px;" src="/images/equipment.png" alt=""></h3>
+            <table>
+                <tr th:each="equipItem : ${equipment}">
+                    <td th:text="${equipItem.equipmentSlotName}"></td>
+                    <td th:text="${equipItem.itemName}"
+                        th:class="${equipItem.itemName.contains('유니크')} ? 'unique' :
+                  (${equipItem.itemName.contains('에픽')} ? 'epic' :
+                  (${equipItem.itemName.contains('레어')} ? 'rare' :
+                  (${equipItem.itemName.contains('Legendary')} ? 'legendary' : '')))">
+                    </td>
+                </tr>
             </table>
         </div>
     </div>

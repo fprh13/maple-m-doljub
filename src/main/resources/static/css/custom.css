@@ -227,6 +227,33 @@ td:last-child {
     align-items: center;
 }
 
+/* 아이템 색상 코드*/
+.rare {
+    color: skyblue;
+}
+.epic {
+    color: #9370DB;
+}
+.unique {
+    color: yellow;
+}
+.legendary {
+    color: #00ff80;
+    animation: shadowPulseItem 3s infinite;
+}
+
+@keyframes shadowPulseItem {
+    0% {
+        filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.5));
+    }
+    50% {
+        filter: drop-shadow(0px 10px 15px rgba(0, 255, 128, 0.7));
+    }
+    100% {
+        filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.5));
+    }
+}
+
 /******************************** 에러 커스텀 **************************************/
 
 .error {
@@ -260,6 +287,7 @@ td:last-child {
     background-size: cover;
     background-repeat: no-repeat;
     margin-bottom: 50px;
+    background-position: center; /* 이미지를 중앙에 정렬 */
 }
 .title h1 {
     padding-bottom: 30px;

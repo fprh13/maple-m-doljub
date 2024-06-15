@@ -64,6 +64,7 @@ public class CharacterController {
     @GetMapping("/character/info/{name}")
     public String characterInfo(Model model, @PathVariable("name") String name) {
         model.addAttribute("character", characterService.info(name));
+        model.addAttribute("equipment", characterService.equipment(name));
         return "characterInfo";
     }
 
@@ -72,6 +73,7 @@ public class CharacterController {
         try {
             CharacterInfoResDto characterInfoResDto = characterService.search(name, world);
             model.addAttribute("character", characterInfoResDto);
+            model.addAttribute("equipment", characterService.equipment(name));
             return "characterInfo";
         } catch (CustomException e) {
             model.addAttribute("characterError", "캐릭터를 찾을 수 없습니다.");

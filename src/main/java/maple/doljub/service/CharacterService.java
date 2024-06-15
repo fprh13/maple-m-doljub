@@ -1,6 +1,7 @@
 package maple.doljub.service;
 
 import lombok.RequiredArgsConstructor;
+import maple.doljub.common.util.EquipmentItemFilterUtil;
 import maple.doljub.domain.Member;
 import maple.doljub.dto.CharacterInfoResDto;
 import maple.doljub.dto.CharacterRegisterReqDto;
@@ -8,12 +9,16 @@ import maple.doljub.dto.maple.CharacterMapleResDto;
 import maple.doljub.common.config.RestTemplateClient;
 import maple.doljub.domain.Character;
 import maple.doljub.domain.Guild;
+import maple.doljub.dto.maple.EquipmentItemDto;
 import maple.doljub.repository.CharacterRepository;
 import maple.doljub.repository.GuildRepository;
 import maple.doljub.repository.MemberRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -73,6 +78,17 @@ public class CharacterService {
         CharacterMapleResDto mapleResDto = restTemplateClient.getCharacterInfo(ocid);
         return new CharacterInfoResDto(mapleResDto,character.getGuild().getName());
     }
+
+    /**
+     * 캐릭터 장비 정보
+     */
+    public List<EquipmentItemDto> equipment(String name) {
+        Character character = characterRepository.findByName(name);
+        String ocid = character.getNexonId();
+        List<EquipmentItemDto> allEquipmentItems = restTemplateClient.getEquipmentItem(ocid);
+        return EquipmentItemFilterUtil.filter(allEquipmentItems); // 장비 필터링
+    }
+
 
     public CharacterInfoResDto search(String name, String world) {
         CharacterRegisterReqDto characterRegisterReqDto = CharacterRegisterReqDto.builder()
