@@ -6,12 +6,8 @@
 <body>
 <head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
 
-<div class="main-section d-flex align-items-center">
+<div class="main-section">
     <div class="container">
-        <!-- 메인 섹션 내용 -->
-<!--        <div class="main-image">-->
-<!--            <img src="./images/main.png" alt="">-->
-<!--        </div>-->
         <div class="main-search">
             <form th:action="@{/character/search{name}(name=${name})}" method="get">
                 <h3>캐릭터 검색</h3>

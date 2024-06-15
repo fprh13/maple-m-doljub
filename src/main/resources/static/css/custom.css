@@ -219,6 +219,23 @@ td:last-child {
     align-items: center;
 }
 
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+    flex-direction: column; /* 세로 정렬 설정 */
+}
+
+.error-image {
+    margin-top: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
 
 
 
