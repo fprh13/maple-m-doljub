@@ -7,18 +7,12 @@
 <div class="title" style="background-image: url('/images/background/background-characterList.jpg');">
     <h1>
         <span>캐릭터 관리</span>
-        <img style="max-width: 33px;" src="/images/characterList.gif" alt="">
+        <img style="max-width: 33px;" src="/images/manage.png" alt="">
     </h1>
 </div>
 
 <div class="main-section">
     <div class="container">
-<!--        캐릭터 등록 하기-->
-        <div class="character-register" >
-            <a href="/character/register" class="plus-button">
-                + 새 캐릭터 등록
-            </a>
-        </div>
         <div class="character-list">
             <table th:if="${!characters.isEmpty()}">
                 <tbody>
@@ -40,10 +34,12 @@
                         </a>
                     </td>
                     <td>
-                        <form style="text-align: right"; class="delete-from" th:object="${deleteDto}" action="/character/delete/process", method="post">
-                            <input type="hidden" name="name" th:value="${character.name}"/>
-                            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-                            <button type="submit" class="outline" style="max-width: 62px; margin-left:">X</button>
+                        <form style="text-align: right; margin-bottom: -20px;" class="delete-from" th:object="${deleteDto}" action="/character/delete/process", method="post">
+                            <div style="display: flex; justify-content: flex-end; align-items: center;">
+                                <input type="hidden" name="name" th:value="${character.name}"/>
+                                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                                <button type="submit" class="outline" style="max-width: 62px; margin-left:" onclick="return confirmDelete();">X</button>
+                            </div>
                         </form>
                     </td>
                 </tr>
@@ -58,4 +54,9 @@
 </div>
 </body>
 <div th:replace="~{fragments/footer :: footer}"></div>
+<script>
+    function confirmDelete() {
+        return confirm('캐릭터를 삭제하시겠습니까?');
+    }
+</script>
 </html>

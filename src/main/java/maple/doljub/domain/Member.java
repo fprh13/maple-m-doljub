@@ -23,15 +23,16 @@ import static maple.doljub.domain.Role.ROLE_USER;
 public class Member extends BaseCreateByEntity {
 
     @Id @GeneratedValue
+    @Column(name = "member_id")
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "loginId", nullable = false, unique = true)
     private String loginId;
 
-    @Column(nullable = false, length = 60)
+    @Column(name = "password", nullable = false, length = 60)
     private String password;
 
-    @Column(nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Enumerated(EnumType.STRING)
@@ -62,5 +63,4 @@ public class Member extends BaseCreateByEntity {
         this.email = email;
         this.password = password;
     }
-
 }

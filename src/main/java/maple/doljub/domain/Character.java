@@ -38,14 +38,19 @@ public class Character extends BaseCreateByEntity {
     @OneToMany(mappedBy = "character")
     private List<CharacterParty> characterParties = new ArrayList<>();
 
+    @Column(name = "nexon_id")
     private String nexonId; // nexon 캐릭터 고유 식별자
 
+    @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(name = "job",nullable = false)
     private String job;
 
+    @Column(name = "job_english_name")
     private String jobEnglishName;
 
+    @Column(name = "world", nullable = false)
     private String world;
 
     public Character(String nexonId, String name, String job, String world) {

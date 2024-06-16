@@ -14,7 +14,7 @@
         <form th:object="${updateDto}" th:action="@{/member/update/process}" method="post" onsubmit="return validateForm()">
 
             <h3 style="padding-left: 50px;">이메일 수정 <img src="/images/email.png" alt=""></h3>
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 30px;">
                 <label th:for="email">이메일</label>
                 <input
                         type="email"
@@ -77,8 +77,8 @@
 <div th:replace="~{fragments/footer :: footer}"></div>
 <script>
     function validateForm() {
-        var password = document.getElementsByName("newPassword")[0].value;
-        var passwordCheck = document.getElementsByName("newPasswordCheck")[0].value;
+        var newPassword = document.getElementsByName("newPassword")[0].value;
+        var newPasswordCheck = document.getElementsByName("newPasswordCheck")[0].value;
 
         if (newPassword !== newPasswordCheck) {
             alert("새 비밀번호와 새 비밀번호 확인이 일치하지 않습니다.");
