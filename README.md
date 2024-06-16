@@ -25,6 +25,7 @@
 - [캐릭터 정보](#캐릭터-정보)
 - [길드 목록](#길드-목록)
 - [회원 기능](#회원-기능)
+- [프로젝트 구조](#프로젝트-구조)
 
 ### 주요 기능
 
@@ -36,41 +37,109 @@
 - ~~보스 일정 관리(미구현)~~
 
 ### ERD (2024.6.16 기준)
-<img src="./images/ERD.png" width="300">
+<img src="./images/ERD.png" >
 
 ### 회원가입 로그인
 - 회원가입
-<img src="./images/회원가입.png" width="300">
+<img src="./images/회원가입.png">
 - 로그인
-<img src="./images/로그인.png" width="300">
+<img src="./images/로그인.png">
 
 ### 캐릭터, 길드 검색
-<img src="./images/메인.png" width="300">
+<img src="./images/메인.png">
 
 ### 캐릭터 관리
 - 나의 캐릭터 목록
-<img src="./images/캐릭터관리.png" width="300">
+<img src="./images/캐릭터관리.png">
 - 새로운 캐릭터 등록
-<img src="./images/캐릭터등록.png" width="300">
+<img src="./images/캐릭터등록.png">
 - 나의 캐릭터 삭제
-<img src="./images/캐릭터삭제.png" width="300">
+<img src="./images/캐릭터삭제.png">
 
 
 ### 캐릭터 정보
-- 메이플스토리 모바일 아이템 기준 (일반(X)) < 레어(blue) < 에픽(보라) < 유니크(노랑) < 레전드(초록)
-<img src="./images/캐릭터1.png" width="300">
-<img src="./images/캐릭터2.png" width="300">
+- 메이플스토리 모바일 아이템 기준 (일반(X) < 레어(blue) < 에픽(보라) < 유니크(노랑) < 레전드(초록)
+<img src="./images/캐릭터1.png">
+<img src="./images/캐릭터2.png">
 
 ### 길드 목록
 - 길드 목록
-<img src="./images/길드.png" width="300">
+<img src="./images/길드.png">
 - 길드원 목록
-<img src="./images/길드정보.png" width="300">
+<img src="./images/길드정보.png">
 
 ### 회원 기능
 - 회원 정보
-<img src="./images/내정보.png" width="300">
+<img src="./images/내정보.png">
 - 회원 수정
-<img src="./images/내정보수정.png" width="300">
+<img src="./images/내정보수정.png">
 - 회원 탈퇴
-<img src="./images/회원탈퇴.png" width="300">
+<img src="./images/회원탈퇴.png">
+
+### 프로젝트 구조
+```
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── maple
+│   │   │       └── doljub
+│   │   │           ├── DoljubApplication.java
+│   │   │           ├── common
+│   │   │           │   ├── auditing
+│   │   │           │   │   ├── BaseCreateByEntity.java
+│   │   │           │   │   ├── BaseTimeEntity.java
+│   │   │           │   │   └── MemberAuditorAware.java
+│   │   │           │   ├── config
+│   │   │           │   │   ├── RestTemplateClient.java
+│   │   │           │   │   └── SecurityConfig.java
+│   │   │           │   ├── exception
+│   │   │           │   │   ├── CustomException.java
+│   │   │           │   │   └── ErrorCode.java
+│   │   │           │   ├── util
+│   │   │           │   │   ├── EquipmentItemFilterUtil.java
+│   │   │           │   │   └── JobTranslator.java
+│   │   │           │   └── validation
+│   │   │           │       ├── ValidationGroups.java
+│   │   │           │       └── ValidationSequence.java
+│   │   │           ├── controller
+│   │   │           │   ├── CharacterController.java
+│   │   │           │   ├── GuildController.java
+│   │   │           │   ├── MainController.java
+│   │   │           │   ├── MemberController.java
+│   │   │           │   └── PartyController.java
+│   │   │           ├── domain
+│   │   │           │   ├── Character.java
+│   │   │           │   ├── CharacterParty.java
+│   │   │           │   ├── Guild.java
+│   │   │           │   ├── Member.java
+│   │   │           │   ├── Party.java
+│   │   │           │   └── Role.java
+│   │   │           ├── dto
+│   │   │           │   ├── CharacterDeleteDto.java
+│   │   │           │   ├── CharacterInfoResDto.java
+│   │   │           │   ├── CharacterRegisterReqDto.java
+│   │   │           │   ├── CustomUserDetails.java
+│   │   │           │   ├── LoginDto.java
+│   │   │           │   ├── MemberDeleteDto.java
+│   │   │           │   ├── MemberResDto.java
+│   │   │           │   ├── MemberSignUpReqDto.java
+│   │   │           │   ├── MemberUpdateReqDto.java
+│   │   │           │   └── maple
+│   │   │           │       ├── CharacterMapleResDto.java
+│   │   │           │       ├── EquipmentItemDto.java
+│   │   │           │       ├── GuildMapleResDto.java
+│   │   │           │       └── OcidMapleResDto.java
+│   │   │           ├── repository
+│   │   │           │   ├── CharacterPartyRepository.java
+│   │   │           │   ├── CharacterRepository.java
+│   │   │           │   ├── GuildRepository.java
+│   │   │           │   ├── MemberRepository.java
+│   │   │           │   └── PartyRepository.java
+│   │   │           └── service
+│   │   │               ├── CharacterService.java
+│   │   │               ├── CustomUserDetailsService.java
+│   │   │               ├── GuildService.java
+│   │   │               └── MemberService.java
+
+
+```
