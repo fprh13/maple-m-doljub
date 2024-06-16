@@ -15,6 +15,17 @@
                     <tbody>
                     <tr th:each="character : ${characters}">
                         <td>
+                            <img th:if="${character.world == '스카니아'}" src="/images/server/skania.png" alt="스카니아 서버 아이콘">
+                            <!-- 루나 서버 아이콘 -->
+                            <img th:if="${character.world == '루나'}" src="/images/server/runa.png" alt="루나 서버 아이콘">
+                            <!-- 오니온 서버 아이콘 -->
+                            <img th:if="${character.world == '오니온'}" src="/images/server/union.png" alt="오니온 서버 아이콘">
+                            <!-- 크로아 서버 아이콘 -->
+                            <img th:if="${character.world == '크로아'}" src="/images/server/croa.png" alt="크로아 서버 아이콘">
+                            <!-- 엘리시움 서버 아이콘 -->
+                            <img th:if="${character.world == '엘리시움'}" src="/images/server/elisium.png" alt="엘리시움 서버 아이콘">
+                            <!-- 제니스 서버 아이콘 -->
+                            <img th:if="${character.world == '제니스'}" src="/images/server/zenis.png" alt="제니스 서버 아이콘">
                             <a th:href="@{/character/info/{name}(name=${character.name})}">
                                 <span th:text="${character.name}"></span>
                             </a>

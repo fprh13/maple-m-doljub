@@ -57,4 +57,10 @@ public class Member extends BaseCreateByEntity {
                 .build();
     }
 
+    /* 사용자 정보 수정 */
+    public void update(String email,String password) {
+        this.email = email;
+        this.password = password;
+    }
+
 }

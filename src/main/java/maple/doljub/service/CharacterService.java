@@ -41,7 +41,7 @@ public class CharacterService {
         // 캐릭터 정보 받아오기
         CharacterMapleResDto characterInfo = restTemplateClient.getCharacterInfo(ocid);
         // 캐릭터 객체 생성
-        Character mapleCharacter = new Character(ocid,characterInfo.getCharacterName(),characterInfo.getCharacterJobName());
+        Character mapleCharacter = new Character(ocid,characterInfo.getCharacterName(),characterInfo.getCharacterJobName(), characterInfo.getWorldName());
         // 길드 정보 받아오기
         String guildName = restTemplateClient.getGuildInfo(ocid);
         if (guildName == null) {

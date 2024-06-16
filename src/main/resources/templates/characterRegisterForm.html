@@ -13,7 +13,6 @@
   <div class="main-search">
 
     <form th:object="${characterDto}" action="/character/register/process", method="post">
-<!--      <h3 style="padding-left: 50px;">캐릭터 등록 <img src="/images/search.gif" alt="search-gif"></h3>-->
       <br>
       <div class="form-group">
         <label th:for="name">닉네임</label>
@@ -28,6 +27,9 @@
         <option th:value="스카니아">스카니아</option>
         <option th:value="루나">루나</option>
         <option th:value="오니온">오니온</option>
+        <option th:value="엘리시움">엘리시움</option>
+        <option th:value="크로아">크로아</option>
+        <option th:value="제니스">제니스</option>
       </select>
 
       <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>

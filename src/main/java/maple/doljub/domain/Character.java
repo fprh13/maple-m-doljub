@@ -46,9 +46,12 @@ public class Character extends BaseCreateByEntity {
 
     private String jobEnglishName;
 
-    public Character(String nexonId, String name, String job) {
+    private String world;
+
+    public Character(String nexonId, String name, String job, String world) {
         this.nexonId = nexonId;
         this.name = name;
+        this.world = world;
 
         // 아크메이지 직업군 대비 replace 진행
         String replaceJob = job.replaceAll("[(),]", "");
@@ -79,7 +82,7 @@ public class Character extends BaseCreateByEntity {
     }
 
     public static Character createCharacter(Character character, Member member, Guild guild) {
-        Character newCharacter = new Character(character.getNexonId(), character.getName(), character.getJob());
+        Character newCharacter = new Character(character.getNexonId(), character.getName(), character.getJob(), character.getWorld());
         newCharacter.setGuild(guild);
         newCharacter.setMember(member);
         return newCharacter;

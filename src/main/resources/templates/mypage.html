@@ -5,22 +5,26 @@
 <body>
 <head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
 
-<div class="title" style="background-image: url('/images/background/background-my-page.jpg');">
+<div class="title" style="background-image: url('/images/background/background-mypage.jpg');">
     <h1>
         <span>내 정보</span>
-        <img style="max-width: 33px;" src="/images/mypage.png" alt="">
+        <img style="max-width: 45px;" src="/images/mypage.png" alt="">
     </h1>
 </div>
 <div class="main-section">
-    <div class="container">
-        <details id="theme-dropdown">
-            <summary id="theme">Theme</summary>
-            <ul>
-                <li><a href="#" data-theme-switcher="light">Light</a></li>
-                <li><a href="#" data-theme-switcher="dark">Dark</a></li>
-                <li><a href="#" data-theme-switcher="auto">Auto</a></li>
-            </ul>
-        </details>
+    <div class="member-info">
+        <h4 th:text="|ID: ${member.loginId}|"></h4>
+        <h4 th:text="|Email: ${member.email}|"></h4>
+        <h4 th:text="|가입일: ${#dates.format(member.createDate, 'yyyy-MM-dd')}|"></h4>
+        <div>
+            <a href="/mypage/update" style="margin-right: 10px;">
+                정보 수정
+            </a>
+            <a href="/member/delete" style="color: red; margin-right: 10px;">
+                회원 탈퇴
+            </a>
+            <img style="max-width: 50px;" src="/images/member.png" alt="">
+        </div>
     </div>
 </div>
 </body>
