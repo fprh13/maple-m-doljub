@@ -41,6 +41,7 @@
                 </table>
                 <img th:if="${characters.isEmpty()}" src="./images/charactor-empty.jpeg" alt="" class="character-empty-image">
                 <div th:if="${characters.isEmpty()}" class="character-empty">
+                    <img th:if="${characters.isEmpty()}" src="/images/charater-empty.png" alt="">
                     <span>등록된 캐릭터가 없습니다...</span>
                 </div>
             </div>

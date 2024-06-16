@@ -87,4 +87,10 @@ public class Character extends BaseCreateByEntity {
         newCharacter.setMember(member);
         return newCharacter;
     }
+
+    /* 길드 정보 갱신 */
+    public void updateGuild(Guild guild) {
+        this.guild = guild;
+        guild.getCharacters().add(this);
+    }
 }

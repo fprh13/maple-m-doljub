@@ -16,7 +16,7 @@
 <!--        캐릭터 등록 하기-->
         <div class="character-register" >
             <a href="/character/register" class="plus-button">
-                + 캐릭터 등록
+                + 새 캐릭터 등록
             </a>
         </div>
         <div class="character-list">
@@ -40,10 +40,11 @@
                         </a>
                     </td>
                     <td>
-                        <div class="job-info">
-                            <div class="job-name" th:text="${character.job}"></div>
-                            <img th:src="@{'/images/job/' + ${character.jobEnglishName} + '.webp'}" alt="Image of job" class="job-image">
-                        </div>
+                        <form style="text-align: right"; class="delete-from" th:object="${deleteDto}" action="/character/delete/process", method="post">
+                            <input type="hidden" name="name" th:value="${character.name}"/>
+                            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                            <button type="submit" class="outline" style="max-width: 62px; margin-left:">X</button>
+                        </form>
                     </td>
                 </tr>
                 </tbody>
@@ -52,13 +53,6 @@
                 <img th:if="${characters.isEmpty()}" src="/images/charater-empty.png" alt="">
                 <span>등록된 캐릭터가 없습니다...</span>
             </div>
-            <div th:if="${!characters.isEmpty()}" style="text-align: right;">
-                <a href="/character/delete" style="margin-right: 10px">
-                    관리
-                    <img src="/images/manage.png" alt="" style="max-width: 33px;">
-                </a>
-            </div>
-
         </div>
     </div>
 </div>

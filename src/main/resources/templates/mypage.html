@@ -13,14 +13,14 @@
 </div>
 <div class="main-section">
     <div class="member-info">
-        <h4 th:text="|ID: ${member.loginId}|"></h4>
-        <h4 th:text="|Email: ${member.email}|"></h4>
-        <h4 th:text="|가입일: ${#dates.format(member.createDate, 'yyyy-MM-dd')}|"></h4>
+        <h5 th:text="|ID: ${member.loginId}|"></h5>
+        <h5 th:text="|Email: ${member.email}|"></h5>
+        <h5 th:text="|가입일: ${#dates.format(member.createDate, 'yyyy-MM-dd')}|"></h5>
         <div>
             <a href="/mypage/update" style="margin-right: 10px;">
                 정보 수정
             </a>
-            <a href="/member/delete" style="color: red; margin-right: 10px;">
+            <a href="/mypage/delete" style="color: red; margin-right: 10px;">
                 회원 탈퇴
             </a>
             <img style="max-width: 50px;" src="/images/member.png" alt="">

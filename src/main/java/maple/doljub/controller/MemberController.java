@@ -5,10 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import maple.doljub.common.exception.CustomException;
 import maple.doljub.common.validation.ValidationSequence;
-import maple.doljub.dto.LoginDto;
-import maple.doljub.dto.MemberResDto;
-import maple.doljub.dto.MemberSignUpReqDto;
-import maple.doljub.dto.MemberUpdateReqDto;
+import maple.doljub.dto.*;
 import maple.doljub.service.MemberService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -115,8 +112,27 @@ public class MemberController {
     /**
      * 회원 탈퇴
      */
-//    @DeleteMapping("/member/delete")
-//    public String delete() {
-//    }
+    @GetMapping("/mypage/delete")
+    public String deletePage(Model model) {
+        model.addAttribute("deleteDto", new MemberDeleteDto());
+        return "memberDeleteForm";
+    }
+
+    @PostMapping("/member/delete/process")
+    public String delete(@Validated(ValidationSequence.class) @ModelAttribute("deleteDto")MemberDeleteDto memberDeleteDto,
+                         BindingResult result, Model model) {
+        /*validation*/
+        if (result.hasErrors()) {
+            return "memberDeleteForm";
+        }
+        try {
+            memberService.delete(memberDeleteDto);
+            return "redirect:/logout";
+        } catch (CustomException e) {
+            model.addAttribute("error", "아이디 비밀번호가 일치하지 않습니다.");
+            return "memberDeleteForm";
+        }
+
+    }
 
 }

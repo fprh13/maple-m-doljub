@@ -171,6 +171,8 @@ footer {
     color: #4CAF50;
     font-size: 24px;
     text-decoration: none;
+    margin-bottom: 10px;
+    animation: shadowPulseItem 3s infinite;
 }
 
 .plus-button:hover {
@@ -209,7 +211,7 @@ footer {
     margin-bottom: 50px;
 }
 
-.member-info > h4 {
+.member-info > h5 {
     text-align: left;
 }
 
@@ -229,6 +231,7 @@ td:not(:first-child):not(:last-child) {
 td:last-child {
     text-align: right;
 }
+
 
 .character-empty {
     display: flex;
@@ -310,6 +313,7 @@ td:last-child {
     padding-bottom: 30px;
     margin-top: 70px;
 }
+
 
 
 

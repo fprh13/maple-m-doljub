@@ -11,9 +11,9 @@
 </div>
 <div class="main-section">
     <div class="main-search">
-        <h3 style="padding-left: 50px;">이메일 수정 <img src="/images/email.png" alt=""></h3>
         <form th:object="${updateDto}" th:action="@{/member/update/process}" method="post" onsubmit="return validateForm()">
-            <br>
+
+            <h3 style="padding-left: 50px;">이메일 수정 <img src="/images/email.png" alt=""></h3>
             <div class="form-group">
                 <label th:for="email">이메일</label>
                 <input

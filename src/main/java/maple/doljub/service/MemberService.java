@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import maple.doljub.common.exception.CustomException;
 import maple.doljub.common.exception.ErrorCode;
 import maple.doljub.domain.Member;
-import maple.doljub.dto.MemberResDto;
-import maple.doljub.dto.MemberSignUpReqDto;
-import maple.doljub.dto.MemberUpdateReqDto;
+import maple.doljub.dto.*;
 import maple.doljub.repository.MemberRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -83,5 +81,18 @@ public class MemberService {
         if (!bCryptPasswordEncoder.matches(memberUpdateReqDto.getPassword(), member.getPassword())) {
             throw new CustomException(ErrorCode.INVALID_REQUEST);
         }
+    }
+
+    /**
+     * 회원 탈퇴
+     */
+    @Transactional
+    public void delete(MemberDeleteDto memberDeleteDto) {
+        Member member = memberRepository.findByLoginId(memberDeleteDto.getLoginId());
+        // 비밀번호가 올바른지
+        if (!bCryptPasswordEncoder.matches(memberDeleteDto.getPassword(), member.getPassword())) {
+            throw new CustomException(ErrorCode.INVALID_REQUEST);
+        }
+        memberRepository.deleteById(member.getId());
     }
 }

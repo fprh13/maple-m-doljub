@@ -1,8 +1,11 @@
 package maple.doljub.service;
 
 import lombok.RequiredArgsConstructor;
+import maple.doljub.common.exception.CustomException;
+import maple.doljub.common.exception.ErrorCode;
 import maple.doljub.common.util.EquipmentItemFilterUtil;
 import maple.doljub.domain.Member;
+import maple.doljub.dto.CharacterDeleteDto;
 import maple.doljub.dto.CharacterInfoResDto;
 import maple.doljub.dto.CharacterRegisterReqDto;
 import maple.doljub.dto.maple.CharacterMapleResDto;
@@ -10,6 +13,7 @@ import maple.doljub.common.config.RestTemplateClient;
 import maple.doljub.domain.Character;
 import maple.doljub.domain.Guild;
 import maple.doljub.dto.maple.EquipmentItemDto;
+import maple.doljub.dto.maple.OcidMapleResDto;
 import maple.doljub.repository.CharacterRepository;
 import maple.doljub.repository.GuildRepository;
 import maple.doljub.repository.MemberRepository;
@@ -18,7 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -62,6 +65,10 @@ public class CharacterService {
         }
     }
 
+    public boolean existsCharacter(CharacterRegisterReqDto characterRegisterReqDto) {
+        return characterRepository.existsByName(characterRegisterReqDto.getName());
+    }
+
     /**
      * 나의 캐릭터 정보
      */
@@ -72,24 +79,40 @@ public class CharacterService {
     /**
      * 캐릭터 정보
      */
+    @Transactional
     public CharacterInfoResDto info(String name) {
         Character character = characterRepository.findByName(name);
         String ocid = character.getNexonId();
         CharacterMapleResDto mapleResDto = restTemplateClient.getCharacterInfo(ocid);
-        return new CharacterInfoResDto(mapleResDto,character.getGuild().getName());
+        String guildName = restTemplateClient.getGuildInfo(ocid);
+        // 길드가 없다면 갱신 X
+        if (guildName == null) {
+            return new CharacterInfoResDto(mapleResDto, guildName);
+        }
+        // 조회 시 길드 정보 갱신
+        character.updateGuild(guildRepository.findByName(guildName));
+        return new CharacterInfoResDto(mapleResDto, guildName);
     }
 
     /**
      * 캐릭터 장비 정보
      */
-    public List<EquipmentItemDto> equipment(String name) {
+    public List<EquipmentItemDto> equipment(String name, String world) {
         Character character = characterRepository.findByName(name);
-        String ocid = character.getNexonId();
+        String ocid;
+        if (character != null) {
+            ocid = character.getNexonId();
+        } else {
+            ocid = restTemplateClient.getOcid(CharacterRegisterReqDto.of(name, world));
+        }
         List<EquipmentItemDto> allEquipmentItems = restTemplateClient.getEquipmentItem(ocid);
-        return EquipmentItemFilterUtil.filter(allEquipmentItems); // 장비 필터링
+        return EquipmentItemFilterUtil.filter(allEquipmentItems);
     }
 
 
+    /**
+     * 캐릭터 검색
+     */
     public CharacterInfoResDto search(String name, String world) {
         CharacterRegisterReqDto characterRegisterReqDto = CharacterRegisterReqDto.builder()
                 .name(name).world(world).build();
@@ -97,5 +120,14 @@ public class CharacterService {
         CharacterMapleResDto mapleResDto = restTemplateClient.getCharacterInfo(ocid);
         String guild = restTemplateClient.getGuildInfo(ocid);
         return new CharacterInfoResDto(mapleResDto,guild);
+    }
+
+    /**
+     * 캐릭터 삭제
+     */
+    @Transactional
+    public void delete(CharacterDeleteDto characterDeleteDto) {
+        Character character = characterRepository.findByName(characterDeleteDto.getName());
+        characterRepository.deleteById(character.getId());
     }
 }
