@@ -4,15 +4,14 @@
 
 <body>
 <head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
-
 <main class="container">
     <article class="grid">
         <div>
             <hgroup>
-                <h1>회원가입</h1>
+                <h1>회원가입 <img style="max-width: 33px;" src="/images/signupIcon.png" alt=""></h1>
                 <p>아래 필드를 모두 채워 주세요.</p>
             </hgroup>
-            <form th:object="${signupDto}" action="/signup/process", method="post" onsubmit="return validateForm()">
+            <form th:object="${signupDto}" th:action="@{/signup/process}" method="post" onsubmit="return validateForm()">
                 <input
                         th:field="*{loginId}"
                         type="text"
@@ -22,6 +21,7 @@
                         autocomplete="username"
                         required
                 />
+                <p style="font-size: 15px; color: red;" th:if = "${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></p>
                 <input
                         th:field="*{email}"
                         type="email"
@@ -31,6 +31,7 @@
                         autocomplete="email"
                         required
                 />
+                <p style="font-size: 15px; color: red;" th:if = "${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                 <input
                         th:field="*{password}"
                         type="password"
@@ -40,6 +41,7 @@
                         autocomplete="current-password"
                         required
                 />
+                <p style="font-size: 15px; color: red;" th:if = "${#fields.hasErrors('password')}" th:errors="*{password}"></p>
                 <input
                         type="password"
                         name="passwordCheck"
@@ -53,6 +55,7 @@
                 <button type="submit" class="contrast" >Submit</button>
             </form>
         </div>
+        <div></div>
     </article>
 </main>
 <div th:replace="~{fragments/footer :: footer}"></div>

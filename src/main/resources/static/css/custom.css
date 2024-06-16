@@ -1,4 +1,4 @@
-/******************************** 로그인 회원가입 루트 **************************************/
+/******************************** 로그인 회원가입 루트 PicoCss **************************************/
 body {
     padding-bottom: 44px;
 }
@@ -72,7 +72,7 @@ article div:nth-of-type(2) {
     display: block;
   }
 }
-/******************************** 메인 **************************************/
+/******************************** 메인 커스텀 **************************************/
 
 /* box 에서 drop-shadow 로 변경 */
 @keyframes shadowPulse {
@@ -89,6 +89,8 @@ article div:nth-of-type(2) {
         filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.5));
     }
 }
+
+ /* 이미지 효과 */
 .main-image img {
     margin-top: 50px;
     overflow: hidden;
@@ -98,31 +100,36 @@ article div:nth-of-type(2) {
     animation: shadowPulse 3s infinite;
 }
 
+ /* 이미지 */
 .main-image {
     display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: center;
+    align-items: center;
 }
 
+ /* 기본 content */
 .main-content {
     display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: center;
+    align-items: center;
 }
 
+ /* 검색 폼 div */
 .main-search {
     text-align: center;
     display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: center;
+    align-items: center;
 }
 
+ /* 검색 폼 */
+ /* 1. 캐릭터 검색 2. 길드 검색*/
 .main-search form {
     width: 320px;
-    justify-content: center; /* 수평 가운데 정렬 */
+    justify-content: center;
 }
 
-/******************************** 푸터 **************************************/
+/******************************** 푸터 커스텀**************************************/
 
 /* Footer */
 body > footer {
@@ -140,12 +147,12 @@ footer {
    padding: 10px 0;
    background-color: #13191E
 }
-/******************************** 캐릭터 **************************************/
+/******************************** 캐릭터 커스텀 **************************************/
 /* 캐릭터 등록 */
 .character-register {
     display: flex;
-    justify-content: right; /* 수평 가운데 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: right;
+    align-items: center;
     text-align: center;
     margin-top: 30px;
 }
@@ -161,13 +168,15 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #4CAF50; /* 플러스 기호 색 */
-    font-size: 24px; /* 플러스 기호 크기 */
-    text-decoration: none; /* 링크 밑줄 제거 */
+    color: #4CAF50;
+    font-size: 24px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    animation: shadowPulseItem 3s infinite;
 }
 
 .plus-button:hover {
-    color: #45a049; /* 호버시 배경색 */
+    color: #45a049;
 }
 
 .job-info {
@@ -177,8 +186,8 @@ footer {
 
 .job-name {
     font-weight: bold;
-    font-size: 14px; /* Set font size to 8px */
-    margin-right: 10px; /* Adjust spacing between job name and image */
+    font-size: 14px;
+    margin-right: 10px;
 }
 
 /* 캐릭터 목록 */
@@ -186,12 +195,30 @@ footer {
     padding: 20px;
     max-width: 600px;
     margin: 0 auto;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 12px 30px 0 rgba(0,0,0,0.4);
+    margin-bottom: 50px;
 }
 
 .character-list > h3 {
     text-align: center;
 }
+
+.member-info {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 12px 30px 0 rgba(0,0,0,0.4);
+    margin-bottom: 50px;
+}
+
+.member-info > h5 {
+    text-align: left;
+}
+
+.member-info > div {
+    text-align: right;
+}
+
 
 td:first-child {
     font-weight: bold;
@@ -205,12 +232,13 @@ td:last-child {
     text-align: right;
 }
 
+
 .character-empty {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 30vh;
-    flex-direction: column; /* 세로 정렬 설정 */
+    flex-direction: column;
 }
 
 .character-empty-image {
@@ -219,12 +247,41 @@ td:last-child {
     align-items: center;
 }
 
+/* 아이템 색상 코드*/
+.rare {
+    color: skyblue;
+}
+.epic {
+    color: #9370DB;
+}
+.unique {
+    color: yellow;
+}
+.legendary {
+    color: #00ff80;
+    animation: shadowPulseItem 3s infinite;
+}
+
+@keyframes shadowPulseItem {
+    0% {
+        filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.5));
+    }
+    50% {
+        filter: drop-shadow(0px 10px 15px rgba(0, 255, 128, 0.7));
+    }
+    100% {
+        filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.5));
+    }
+}
+
+/******************************** 에러 커스텀 **************************************/
+
 .error {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 30vh;
-    flex-direction: column; /* 세로 정렬 설정 */
+    flex-direction: column;
 }
 
 .error-image {
@@ -233,6 +290,30 @@ td:last-child {
     justify-content: center;
     align-items: center;
 }
+
+.fieldError {
+    border-color: red;
+    color: red;
+}
+
+/******************************** 글로벌 커스텀 **************************************/
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-bottom: 50px;
+    background-position: center; /* 이미지를 중앙에 정렬 */
+}
+.title h1 {
+    padding-bottom: 30px;
+    margin-top: 70px;
+}
+
 
 
 

@@ -38,17 +38,25 @@ public class Character extends BaseCreateByEntity {
     @OneToMany(mappedBy = "character")
     private List<CharacterParty> characterParties = new ArrayList<>();
 
+    @Column(name = "nexon_id")
     private String nexonId; // nexon 캐릭터 고유 식별자
 
+    @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(name = "job",nullable = false)
     private String job;
 
+    @Column(name = "job_english_name")
     private String jobEnglishName;
 
-    public Character(String nexonId, String name, String job) {
+    @Column(name = "world", nullable = false)
+    private String world;
+
+    public Character(String nexonId, String name, String job, String world) {
         this.nexonId = nexonId;
         this.name = name;
+        this.world = world;
 
         // 아크메이지 직업군 대비 replace 진행
         String replaceJob = job.replaceAll("[(),]", "");
@@ -79,9 +87,15 @@ public class Character extends BaseCreateByEntity {
     }
 
     public static Character createCharacter(Character character, Member member, Guild guild) {
-        Character newCharacter = new Character(character.getNexonId(), character.getName(), character.getJob());
+        Character newCharacter = new Character(character.getNexonId(), character.getName(), character.getJob(), character.getWorld());
         newCharacter.setGuild(guild);
         newCharacter.setMember(member);
         return newCharacter;
+    }
+
+    /* 길드 정보 갱신 */
+    public void updateGuild(Guild guild) {
+        this.guild = guild;
+        guild.getCharacters().add(this);
     }
 }

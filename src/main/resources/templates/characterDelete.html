@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/header :: header}"></head>
+
+<body>
+<head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
+<div class="title" style="background-image: url('/images/background/background-characterList.jpg');">
+    <h1>
+        <span>캐릭터 관리</span>
+        <img style="max-width: 33px;" src="/images/manage.png" alt="">
+    </h1>
+</div>
+
+<div class="main-section">
+    <div class="container">
+        <div class="character-list">
+            <table th:if="${!characters.isEmpty()}">
+                <tbody>
+                <tr th:each="character : ${characters}">
+                    <td>
+                        <img th:if="${character.world == '스카니아'}" src="/images/server/skania.png" alt="스카니아 서버 아이콘">
+                        <!-- 루나 서버 아이콘 -->
+                        <img th:if="${character.world == '루나'}" src="/images/server/runa.png" alt="루나 서버 아이콘">
+                        <!-- 오니온 서버 아이콘 -->
+                        <img th:if="${character.world == '오니온'}" src="/images/server/union.png" alt="오니온 서버 아이콘">
+                        <!-- 크로아 서버 아이콘 -->
+                        <img th:if="${character.world == '크로아'}" src="/images/server/croa.png" alt="크로아 서버 아이콘">
+                        <!-- 엘리시움 서버 아이콘 -->
+                        <img th:if="${character.world == '엘리시움'}" src="/images/server/elisium.png" alt="엘리시움 서버 아이콘">
+                        <!-- 제니스 서버 아이콘 -->
+                        <img th:if="${character.world == '제니스'}" src="/images/server/zenis.png" alt="제니스 서버 아이콘">
+                        <a th:href="@{/character/info/{name}(name=${character.name})}">
+                            <span th:text="${character.name}"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <form style="text-align: right; margin-bottom: -20px;" class="delete-from" th:object="${deleteDto}" action="/character/delete/process", method="post">
+                            <div style="display: flex; justify-content: flex-end; align-items: center;">
+                                <input type="hidden" name="name" th:value="${character.name}"/>
+                                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                                <button type="submit" class="outline" style="max-width: 62px; margin-left:" onclick="return confirmDelete();">X</button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div th:if="${characters.isEmpty()}" class="character-empty">
+                <img th:if="${characters.isEmpty()}" src="/images/charater-empty.png" alt="">
+                <span>등록된 캐릭터가 없습니다...</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script>
+    function confirmDelete() {
+        return confirm('캐릭터를 삭제하시겠습니까?');
+    }
+</script>
+</html>

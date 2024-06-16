@@ -5,12 +5,18 @@
 
 <body>
 <head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
+<div class="title" style="background-image: url('/images/background/background.jpg');">
+    <h1>
+        <span>메이플스토리 </span>
+        <img style="max-width: 60px;" src="/images/maple-m.png" alt="">
+    </h1>
+</div>
 
 <div class="main-section">
     <div class="container">
         <div class="main-search">
             <form th:action="@{/character/search{name}(name=${name})}" method="get">
-                <h3>캐릭터 검색</h3>
+                <h3 style="padding-left: 50px;">캐릭터 검색 <img src="/images/search.gif" alt=""></h3>
                 <div class="form-group">
                     <input type="text" name="name" class="form-control" placeholder="캐릭터 이름을 입력하세요." th:value="${name}" />
                 </div>
@@ -21,6 +27,9 @@
                     <option th:value="스카니아">스카니아</option>
                     <option th:value="루나">루나</option>
                     <option th:value="오니온">오니온</option>
+                    <option th:value="엘리시움">엘리시움</option>
+                    <option th:value="크로아">크로아</option>
+                    <option th:value="제니스">제니스</option>
                 </select>
                 <br>
                 <small th:if="${characterError}" style="color: red" th:text="${characterError}">캐릭터를 찾을 수 없습니다.</small>
@@ -29,7 +38,7 @@
         </div>
         <div class="main-search">
             <form th:action="@{/guild/search{name}(name=${name})}" method="get">
-                <h3>길드 검색</h3>
+                <h3 style="padding-left: 50px;">길드 검색 <img src="/images/search.gif" alt=""></h3>
                 <div class="form-group">
                     <input type="text" name="name" class="form-control" placeholder="길드명 입력을 입력해주세요." th:value="${name}" />
                 </div>

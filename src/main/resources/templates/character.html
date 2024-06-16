@@ -4,27 +4,37 @@
 
 <body>
 <head th:replace="~{fragments/bodyHeader :: bodyHeader}"></head>
+<div class="title" style="background-image: url('/images/background/background-characterList.jpg');">
+    <h1>
+        <span>캐릭터 관리</span>
+        <img style="max-width: 33px;" src="/images/characterList.gif" alt="">
+    </h1>
+</div>
 
 <div class="main-section">
     <div class="container">
 <!--        캐릭터 등록 하기-->
         <div class="character-register" >
             <a href="/character/register" class="plus-button">
-                + 새 캐릭터 등록
+                + 캐릭터 등록
             </a>
         </div>
         <div class="character-list">
             <table th:if="${!characters.isEmpty()}">
-                <thead>
-                <tr>
-                    <th>닉네임</th>
-                    <th>직업</th>
-                    <th></th>
-                </tr>
-                </thead>
                 <tbody>
                 <tr th:each="character : ${characters}">
                     <td>
+                        <img th:if="${character.world == '스카니아'}" src="/images/server/skania.png" alt="스카니아 서버 아이콘">
+                        <!-- 루나 서버 아이콘 -->
+                        <img th:if="${character.world == '루나'}" src="/images/server/runa.png" alt="루나 서버 아이콘">
+                        <!-- 오니온 서버 아이콘 -->
+                        <img th:if="${character.world == '오니온'}" src="/images/server/union.png" alt="오니온 서버 아이콘">
+                        <!-- 크로아 서버 아이콘 -->
+                        <img th:if="${character.world == '크로아'}" src="/images/server/croa.png" alt="크로아 서버 아이콘">
+                        <!-- 엘리시움 서버 아이콘 -->
+                        <img th:if="${character.world == '엘리시움'}" src="/images/server/elisium.png" alt="엘리시움 서버 아이콘">
+                        <!-- 제니스 서버 아이콘 -->
+                        <img th:if="${character.world == '제니스'}" src="/images/server/zenis.png" alt="제니스 서버 아이콘">
                         <a th:href="@{/character/info/{name}(name=${character.name})}">
                             <span th:text="${character.name}"></span>
                         </a>
@@ -39,9 +49,16 @@
                 </tbody>
             </table>
             <div th:if="${characters.isEmpty()}" class="character-empty">
-                <img th:if="${characters.isEmpty()}" src="./images/charater-empty.png" alt="">
+                <img th:if="${characters.isEmpty()}" src="/images/charater-empty.png" alt="">
                 <span>등록된 캐릭터가 없습니다...</span>
             </div>
+            <div th:if="${!characters.isEmpty()}" style="text-align: right;">
+                <a href="/character/delete" style="margin-right: 10px">
+                    관리
+                    <img src="/images/manage.png" alt="" style="max-width: 33px;">
+                </a>
+            </div>
+
         </div>
     </div>
 </div>
