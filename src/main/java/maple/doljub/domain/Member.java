@@ -47,7 +47,8 @@ public class Member extends BaseCreateByEntity {
         this.role = (role != null) ? role : ROLE_USER;
     }
 
-    public static Member of(MemberSignUpReqDto requestDto, String encodedPassword) {
+    /* 맴버 생성 */
+    public static Member createMember(MemberSignUpReqDto requestDto, String encodedPassword) {
         return Member.builder()
                 .loginId(requestDto.getLoginId())
                 .password(encodedPassword)

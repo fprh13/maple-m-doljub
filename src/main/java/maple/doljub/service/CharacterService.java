@@ -31,7 +31,7 @@ public class CharacterService {
     private final RestTemplateClient restTemplateClient;
 
     /**
-     * 캐릭터 등록
+     * Create : 캐릭터 등록
      */
     @Transactional
     public Long join(CharacterRegisterReqDto characterRegisterReqDto) {
@@ -62,19 +62,20 @@ public class CharacterService {
         }
     }
 
+    /* 존재 하는 캐릭터 인지 확인 */
     public boolean existsCharacter(CharacterRegisterReqDto characterRegisterReqDto) {
         return characterRepository.existsByName(characterRegisterReqDto.getName());
     }
 
     /**
-     * 나의 캐릭터 정보
+     * Read : 나의 캐릭터 목록
      */
     public Member findMyCharacters() {
         return memberRepository.findCharactersByLoginId(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
     /**
-     * 캐릭터 정보
+     * Read : 캐릭터 정보
      */
     @Transactional
     public CharacterInfoResDto info(String name) {
@@ -92,7 +93,7 @@ public class CharacterService {
     }
 
     /**
-     * 캐릭터 장비 정보
+     * Read : 캐릭터 장비 정보
      */
     public List<EquipmentItemDto> equipment(String name, String world) {
         Character character = characterRepository.findByName(name);
@@ -108,7 +109,7 @@ public class CharacterService {
 
 
     /**
-     * 캐릭터 검색
+     * Read : 캐릭터 검색
      */
     public CharacterInfoResDto search(String name, String world) {
         CharacterRegisterReqDto characterRegisterReqDto = CharacterRegisterReqDto.builder()
@@ -120,7 +121,7 @@ public class CharacterService {
     }
 
     /**
-     * 캐릭터 삭제
+     * Delete : 캐릭터 삭제
      */
     @Transactional
     public void delete(CharacterDeleteReqDto characterDeleteReqDto) {
