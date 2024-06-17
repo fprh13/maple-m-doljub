@@ -22,6 +22,7 @@
                         required
                 />
                 <p style="font-size: 15px; color: red;" th:if = "${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></p>
+                <p th:if="${duplicate}" style="font-size: 15px; color: red" th:text="${duplicate}">Duplicate</p>
                 <input
                         th:field="*{email}"
                         type="email"

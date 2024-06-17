@@ -27,22 +27,23 @@ public class MemberController {
      */
     @GetMapping("/signup")
     public String signupPage(Model model) {
-        model.addAttribute("signupDto", new MemberSignUpReqDto());
+        MemberSignUpReqDto memberSignUpReqDto = new MemberSignUpReqDto();
+        model.addAttribute("signupDto", memberSignUpReqDto);
         return "signup";
     }
 
     @PostMapping("/signup/process")
     public String signupProcess(@Validated(ValidationSequence.class) @ModelAttribute("signupDto") MemberSignUpReqDto memberSignUpReqDto,
-                                BindingResult result) {
+                                BindingResult result, Model model) {
         /*validation*/
         if (result.hasErrors()) {
-            return "/signup";
+            return "signup";
         }
         /*아이디 중복 확인*/
         boolean isMember = memberService.existsByLoginId(memberSignUpReqDto.getLoginId());
         if (isMember) {
-            result.rejectValue("loginId", "duplicate", "이미 사용 중인 아이디입니다.");
-            return "/signup";
+            model.addAttribute("duplicate", "이미 사용 중 인 아이디 입니다.");
+            return "signup";
         }
         /*회원가입 진행*/
         memberService.join(memberSignUpReqDto);
