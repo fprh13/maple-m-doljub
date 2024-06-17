@@ -40,9 +40,9 @@ public class SecurityConfig {
                         .requestMatchers("/",
                                 "/login",
                                 "/login/process",
-                                "/signup",
-                                "/signup/process",
-                                "/guild/**", // 길드 정보
+                                "/signup", // 회원가입
+                                "/signup/process", // 회원 가입 요청
+                                "/guild/**", // 길드 정보 조회
                                 "/character/search**", // 캐릭터 검색
                                 "/character/info/**", // 캐릭터 조회
                                 "/error").permitAll()
@@ -72,7 +72,7 @@ public class SecurityConfig {
                 .sessionManagement((auth) -> auth
                         .sessionFixation().changeSessionId());
 
-//         개발 단계에서만 사용함
+//         개발 단계에서만 사용할 예정
         http
                 .csrf((auth) -> auth.disable())
                 .headers(
@@ -84,7 +84,7 @@ public class SecurityConfig {
                 );
 
 
-        // post가 아닌 get요청으로 로그아웃 진행하기
+        // post가 아닌 get요청으로 로그아웃 진행 할 것
         http
                 .logout((auth) -> auth.logoutUrl("/logout")
                         .logoutSuccessUrl("/"));

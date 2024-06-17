@@ -3,7 +3,6 @@ package maple.doljub.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import maple.doljub.common.util.JobTranslator;
-import maple.doljub.domain.Character;
 import maple.doljub.dto.maple.CharacterMapleResDto;
 
 @Getter

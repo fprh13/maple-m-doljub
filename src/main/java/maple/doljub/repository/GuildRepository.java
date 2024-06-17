@@ -1,7 +1,6 @@
 package maple.doljub.repository;
 
 import maple.doljub.domain.Guild;
-import maple.doljub.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

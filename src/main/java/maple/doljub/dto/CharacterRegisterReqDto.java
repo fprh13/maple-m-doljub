@@ -1,8 +1,6 @@
 package maple.doljub.dto;
 
 import lombok.*;
-import maple.doljub.domain.Character;
-import org.springframework.stereotype.Service;
 
 @Getter
 @Setter

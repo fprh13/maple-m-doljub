@@ -1,11 +1,9 @@
 package maple.doljub.service;
 
 import lombok.RequiredArgsConstructor;
-import maple.doljub.common.exception.CustomException;
-import maple.doljub.common.exception.ErrorCode;
 import maple.doljub.common.util.EquipmentItemFilterUtil;
 import maple.doljub.domain.Member;
-import maple.doljub.dto.CharacterDeleteDto;
+import maple.doljub.dto.CharacterDeleteReqDto;
 import maple.doljub.dto.CharacterInfoResDto;
 import maple.doljub.dto.CharacterRegisterReqDto;
 import maple.doljub.dto.maple.CharacterMapleResDto;
@@ -13,7 +11,6 @@ import maple.doljub.common.config.RestTemplateClient;
 import maple.doljub.domain.Character;
 import maple.doljub.domain.Guild;
 import maple.doljub.dto.maple.EquipmentItemDto;
-import maple.doljub.dto.maple.OcidMapleResDto;
 import maple.doljub.repository.CharacterRepository;
 import maple.doljub.repository.GuildRepository;
 import maple.doljub.repository.MemberRepository;
@@ -126,8 +123,8 @@ public class CharacterService {
      * 캐릭터 삭제
      */
     @Transactional
-    public void delete(CharacterDeleteDto characterDeleteDto) {
-        Character character = characterRepository.findByName(characterDeleteDto.getName());
+    public void delete(CharacterDeleteReqDto characterDeleteReqDto) {
+        Character character = characterRepository.findByName(characterDeleteReqDto.getName());
         characterRepository.deleteById(character.getId());
     }
 }

@@ -11,7 +11,7 @@ import maple.doljub.common.validation.ValidationGroups;
 @Getter
 @Setter
 @NoArgsConstructor
-public class MemberDeleteDto {
+public class MemberDeleteReqDto {
     @NotBlank(message = "아이디가 입력되지 않았습니다.", groups = ValidationGroups.NotBlankGroup.class)
     @Pattern(regexp = "^[a-z0-9]{4,20}$", message = "아이디는 영어 소문자와 숫자만 사용하여 4~20자리여야 합니다.",
             groups = ValidationGroups.PatternGroup.class)
@@ -24,7 +24,7 @@ public class MemberDeleteDto {
     private String password;
 
     @Builder
-    public MemberDeleteDto(String loginId, String password) {
+    public MemberDeleteReqDto(String loginId, String password) {
         this.loginId = loginId;
         this.password = password;
     }

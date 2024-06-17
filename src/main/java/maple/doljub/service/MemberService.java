@@ -87,10 +87,10 @@ public class MemberService {
      * 회원 탈퇴
      */
     @Transactional
-    public void delete(MemberDeleteDto memberDeleteDto) {
-        Member member = memberRepository.findByLoginId(memberDeleteDto.getLoginId());
+    public void delete(MemberDeleteReqDto memberDeleteReqDto) {
+        Member member = memberRepository.findByLoginId(memberDeleteReqDto.getLoginId());
         // 비밀번호가 올바른지
-        if (!bCryptPasswordEncoder.matches(memberDeleteDto.getPassword(), member.getPassword())) {
+        if (!bCryptPasswordEncoder.matches(memberDeleteReqDto.getPassword(), member.getPassword())) {
             throw new CustomException(ErrorCode.INVALID_REQUEST);
         }
         memberRepository.deleteById(member.getId());

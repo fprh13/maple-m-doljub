@@ -45,7 +45,6 @@ public class CustomUserDetails implements UserDetails {
         return member.getLoginId();
     }
 
-    // 만료 조건을 충족시키기 위해서는 DB에 추가해야한다.
     @Override
     public boolean isAccountNonExpired() {
         return true;

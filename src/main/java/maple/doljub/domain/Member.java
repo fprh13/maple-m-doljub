@@ -13,9 +13,6 @@ import java.util.List;
 
 import static maple.doljub.domain.Role.ROLE_USER;
 
-/**
- * 1. 회원가입 시 나의 캐릭터를 생성한다.
- */
 @Entity
 @Table(name = "member")
 @Getter
