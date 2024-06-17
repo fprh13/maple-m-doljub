@@ -36,13 +36,13 @@ public class MemberController {
                                 BindingResult result) {
         /*validation*/
         if (result.hasErrors()) {
-            return "/signup";
+            return "signup";
         }
         /*아이디 중복 확인*/
         boolean isMember = memberService.existsByLoginId(memberSignUpReqDto.getLoginId());
         if (isMember) {
             result.rejectValue("loginId", "duplicate", "이미 사용 중인 아이디입니다.");
-            return "/signup";
+            return "signup";
         }
         /*회원가입 진행*/
         memberService.join(memberSignUpReqDto);
