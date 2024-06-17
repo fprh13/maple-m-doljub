@@ -65,7 +65,7 @@
                         required
                 />
             </div>
-            <p style="font-size: 15px; color: red;" th:if = "${#fields.hasErrors('newPasswordCheck')}" th:errors="*{newPasswordCheck}"></p>
+<!--            <p style="font-size: 15px; color: red;" th:if = "${#fields.hasErrors('newPasswordCheck')}" th:errors="*{newPasswordCheck}"></p>-->
 
             <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
             <small th:if="${error}" style="color: red" th:text="${error}">Error</small>

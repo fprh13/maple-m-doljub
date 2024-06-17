@@ -9,7 +9,6 @@ import static maple.doljub.common.validation.ValidationGroups.*;
 
 @Getter
 @NoArgsConstructor
-@ToString
 @Setter
 public class MemberSignUpReqDto {
 
