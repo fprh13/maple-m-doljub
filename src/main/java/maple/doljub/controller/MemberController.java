@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -32,10 +33,12 @@ public class MemberController {
         return "signup";
     }
 
+    /**
+     * Create : 회원가입 요청
+     */
     @PostMapping("/signup/process")
     public String signupProcess(@Validated(ValidationSequence.class) @ModelAttribute("signupDto") MemberSignUpReqDto memberSignUpReqDto,
                                 BindingResult result, Model model) {
-        /*validation*/
         if (result.hasErrors()) {
             return "signup";
         }
@@ -73,7 +76,7 @@ public class MemberController {
     }
 
     /**
-     * 회원 정보
+     * Read : 회원 정보
      */
     @GetMapping("/mypage")
     public String mypage(Model model) {
@@ -93,14 +96,15 @@ public class MemberController {
         return "memberUpdateForm";
     }
 
+    /**
+     * Update : 회원 정보 수정 요청
+     */
     @PostMapping("/member/update/process")
     public String updateProcess(@Validated(ValidationSequence.class) @ModelAttribute("updateDto") MemberUpdateReqDto memberUpdateReqDto,
                          BindingResult result, Model model) {
-        /*validation*/
         if (result.hasErrors()) {
             return "memberUpdateForm";
         }
-        /* 업데이트 진행*/
         try {
             memberService.update(memberUpdateReqDto);
             return "redirect:/mypage";
@@ -115,25 +119,25 @@ public class MemberController {
      */
     @GetMapping("/mypage/delete")
     public String deletePage(Model model) {
-        model.addAttribute("deleteDto", new MemberDeleteDto());
+        model.addAttribute("deleteDto", new MemberDeleteReqDto());
         return "memberDeleteForm";
     }
 
+    /**
+     * Delete: 회원 탈 요청
+     */
     @PostMapping("/member/delete/process")
-    public String delete(@Validated(ValidationSequence.class) @ModelAttribute("deleteDto")MemberDeleteDto memberDeleteDto,
+    public String delete(@Validated(ValidationSequence.class) @ModelAttribute("deleteDto") MemberDeleteReqDto memberDeleteReqDto,
                          BindingResult result, Model model) {
-        /*validation*/
         if (result.hasErrors()) {
             return "memberDeleteForm";
         }
         try {
-            memberService.delete(memberDeleteDto);
+            memberService.delete(memberDeleteReqDto);
             return "redirect:/logout";
         } catch (CustomException e) {
             model.addAttribute("error", "아이디 비밀번호가 일치하지 않습니다.");
             return "memberDeleteForm";
         }
-
     }
-
 }

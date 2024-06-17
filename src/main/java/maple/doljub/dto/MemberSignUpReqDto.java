@@ -3,7 +3,6 @@ package maple.doljub.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
-import maple.doljub.common.validation.ValidationGroups;
 
 import static maple.doljub.common.validation.ValidationGroups.*;
 

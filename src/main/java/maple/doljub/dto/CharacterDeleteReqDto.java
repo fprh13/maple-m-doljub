@@ -8,11 +8,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CharacterDeleteDto {
+public class CharacterDeleteReqDto {
     private String name;
 
     @Builder
-    public CharacterDeleteDto(String name) {
+    public CharacterDeleteReqDto(String name) {
         this.name = name;
     }
 }

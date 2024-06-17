@@ -24,6 +24,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 1. 캐릭터의 nexonID ( ocid ) 를 조회
+ * 2. 캐릭터 기본 정보를 조회
+ * 3. 캐릭터 길드 정보를 조회
+ * 3. 캐릭터 장비 정보를 조회
+ */
 @Component
 public class RestTemplateClient {
 
@@ -39,9 +45,11 @@ public class RestTemplateClient {
     String URL;
 
 
+    /**
+     * 캐릭터의 nexonID ( ocid ) 를 조회
+     */
     public String getOcid(CharacterRegisterReqDto characterRegisterReqDto) {
-        // URI 빌드
-        URI uri = UriComponentsBuilder.fromUriString("https://open.api.nexon.com/maplestorym/v1/id")
+        URI uri = UriComponentsBuilder.fromUriString(URL + "/v1/id")
                 .queryParam("character_name", characterRegisterReqDto.getName())
                 .queryParam("world_name", characterRegisterReqDto.getWorld())
                 .encode(StandardCharsets.UTF_8)
@@ -74,9 +82,11 @@ public class RestTemplateClient {
         }
     }
 
+    /**
+     * 캐릭터 기본 정보를 조회
+     */
     public CharacterMapleResDto getCharacterInfo(String ocid) {
-        // URI 빌드
-        URI uri = UriComponentsBuilder.fromUriString("https://open.api.nexon.com/maplestorym/v1/character/basic")
+        URI uri = UriComponentsBuilder.fromUriString(URL + "/v1/character/basic")
                 .queryParam("ocid", ocid)
                 .encode(StandardCharsets.UTF_8)
                 .build()
@@ -108,8 +118,10 @@ public class RestTemplateClient {
 
     }
 
+    /**
+     * 캐릭터 길드 정보 조회
+     */
     public String getGuildInfo(String ocid) {
-        // URI 빌드
         URI uri = UriComponentsBuilder.fromUriString(URL + "/v1/character/guild")
                 .queryParam("ocid", ocid)
                 .encode(StandardCharsets.UTF_8)
@@ -123,7 +135,6 @@ public class RestTemplateClient {
 
         // HTTP 요청 보내기
         HttpEntity<String> entity = new HttpEntity<>(headers);
-//        return restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         // 바디 응답 값을 DTO 객체로 매핑
         ObjectMapper objectMapper = new ObjectMapper();
@@ -142,9 +153,11 @@ public class RestTemplateClient {
         }
     }
 
+    /**
+     * 캐릭터 장비 정보 조회
+     */
     public List<EquipmentItemDto> getEquipmentItem(String ocid) {
-        // URI 빌드
-        URI uri = UriComponentsBuilder.fromUriString("https://open.api.nexon.com/maplestorym/v1/character/item-equipment")
+        URI uri = UriComponentsBuilder.fromUriString(URL + "/v1/character/item-equipment")
                 .queryParam("ocid", ocid)
                 .encode(StandardCharsets.UTF_8)
                 .build()
@@ -176,7 +189,6 @@ public class RestTemplateClient {
             // 기타 예외 처리
             throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
         }
-
     }
 }
 

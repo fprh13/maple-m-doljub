@@ -1,18 +1,14 @@
 package maple.doljub.controller;
 
 import lombok.RequiredArgsConstructor;
-import maple.doljub.common.exception.CustomException;
 import maple.doljub.domain.Character;
 import maple.doljub.domain.Guild;
-import maple.doljub.dto.CharacterInfoResDto;
 import maple.doljub.service.GuildService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -25,12 +21,18 @@ public class GuildController {
 
     private final GuildService guildService;
 
+    /**
+     * Read: 길드 목록
+     */
     @GetMapping("/guild")
     public String guildList(Model model) {
         model.addAttribute("guilds", guildService.guildList());
         return "guild";
     }
 
+    /**
+     * Read : 길드원 조회
+     */
     @GetMapping("/guild/info/{name}")
     public String guildInfo(Model model, @PathVariable("name") String name) {
         Guild guild = guildService.guildInfo(name);
@@ -40,6 +42,9 @@ public class GuildController {
         return "guildInfo";
     }
 
+    /**
+     * Read : 길드 검색
+     */
     @GetMapping("/guild/search")
     public String characterInfoOther(Model model, @RequestParam("name") String name) {
         Guild guild = guildService.guildSearch(name);

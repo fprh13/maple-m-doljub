@@ -10,10 +10,6 @@ import maple.doljub.common.util.JobTranslator;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 1. 캐릭터를 생성할 시 길드에 가입 or 생성
- * 2. 길드가 없다면 길드 1.을 수행 하지 않는다.
- */
 @Entity
 @Table(name = "character")
 @Getter
@@ -86,6 +82,7 @@ public class Character extends BaseCreateByEntity {
         member.getCharacters().add(this);
     }
 
+    /* 캐릭터 생성 */
     public static Character createCharacter(Character character, Member member, Guild guild) {
         Character newCharacter = new Character(character.getNexonId(), character.getName(), character.getJob(), character.getWorld());
         newCharacter.setGuild(guild);

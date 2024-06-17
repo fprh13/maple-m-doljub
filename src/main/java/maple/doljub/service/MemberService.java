@@ -23,11 +23,11 @@ public class MemberService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
-     * 회원 가입
+     * Create : 회원 가입
      */
     @Transactional
     public void join(MemberSignUpReqDto memberSignUpReqDto) {
-        Member member = Member.of(memberSignUpReqDto, bCryptPasswordEncoder.encode(memberSignUpReqDto.getPassword()));
+        Member member = Member.createMember(memberSignUpReqDto, bCryptPasswordEncoder.encode(memberSignUpReqDto.getPassword()));
         memberRepository.save(member);
     }
 
@@ -37,7 +37,7 @@ public class MemberService {
     }
 
     /**
-     * 회원 정보 조회
+     * Read : 회원 정보 조회
      */
     public MemberResDto find(String loginId) {
         Member member = memberRepository.findByLoginId(loginId);
@@ -49,7 +49,7 @@ public class MemberService {
     }
 
     /**
-     * 회원 정보 수정
+     * Update : 회원 정보 수정
      */
     @Transactional
     public void update(MemberUpdateReqDto memberUpdateReqDto) {
@@ -84,13 +84,17 @@ public class MemberService {
     }
 
     /**
-     * 회원 탈퇴
+     * Delete : 회원 탈퇴
      */
     @Transactional
-    public void delete(MemberDeleteDto memberDeleteDto) {
-        Member member = memberRepository.findByLoginId(memberDeleteDto.getLoginId());
+    public void delete(MemberDeleteReqDto memberDeleteReqDto) {
+        Member member = memberRepository.findByLoginId(memberDeleteReqDto.getLoginId());
+        // 아이디가 잘못된 경우
+        if (member == null) {
+            throw new CustomException(ErrorCode.INVALID_REQUEST);
+        }
         // 비밀번호가 올바른지
-        if (!bCryptPasswordEncoder.matches(memberDeleteDto.getPassword(), member.getPassword())) {
+        if (!bCryptPasswordEncoder.matches(memberDeleteReqDto.getPassword(), member.getPassword())) {
             throw new CustomException(ErrorCode.INVALID_REQUEST);
         }
         memberRepository.deleteById(member.getId());
